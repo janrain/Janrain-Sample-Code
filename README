@@ -4,3 +4,11 @@ token URL on your site to use the
 returned token to call auth_info.
 
 No warranty, use at your own risk.
+
+====Third Party Examples====
+
+haskell:
+http://hackage.haskell.org/cgi-bin/hackage-scripts/package/authenticate
+
+Perl:
+http://search.cpan.org/~konobi/Net-API-RPX-0.01/
