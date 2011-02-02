@@ -29,7 +29,7 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
   $post_data = array('token'  => $token,
                      'apiKey' => $rpx_api_key,
                      'format' => 'json',
-                     'extended' => 'true'); 
+                     'extended' => 'true'); //Extended is not available to Basic.
 
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
