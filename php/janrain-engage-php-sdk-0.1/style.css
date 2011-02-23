@@ -58,7 +58,7 @@
 #api_menu {
 	float:left;
 	width:100px;
-	height:100%;
+	height:26px;
 	background-color:#EEF;	
 }
 
@@ -70,17 +70,15 @@
 }
 
 #instructions_wrapper {
-	float:left;
-	width:700px;
+	width:800px;
 	height:120px;
 	background-color:#DDD;
 }
 
 #instructions {
-	clear:both;
 	position:absolute;
 	top:0px;
-	left:100px;
+	left:0px;
 	padding:0px;
 	padding-left:10px;
 	background-color:transparent;
@@ -89,29 +87,35 @@
 .instruction_title {
 	position:absolute;
 	top:0px;
+	left:100px;
 	padding:0px;
 	margin:0px;
-	width:150px;
+	width:140px;
 	height:26px;
 	color:#444;	
 	background-color:transparent;
 	text-align:center;
+	font-size:16px;
 }
 
 #step_one_title {
-	left:0px;
+	left:100px;
 }
 
 #step_two_title {
-	left:150px;
+	left:240px;
 }
 
 #step_three_title {
-	left:300px;
+	left:380px;
+}
+
+#step_four_title {
+	left:520px;
 }
 
 #step_error_title {
-	left:450px;
+	left:660px;
 }
 
 #step_error_title {
@@ -126,17 +130,27 @@
 	display:block !important;
 }
 
+#step_four:hover .instruction {
+	display:block !important;
+}
+
 .instruction  {
-	clear:both;
 	position:absolute;
 	padding:10px;
 	margin:0px;
 	top:26px;
 	left:0px;
-	width:680px;
-	height:74px;
-	background-color:#FFF;
+	width:800px;
+	height:95px;
+	background-color:#DDD;
 	display:none;
+	font-size:14px;	
+}
+
+#app_domain_form {
+	width:700px;
+	height:40px;
+	display:inline;
 }
 
 #main_form_wrapper {

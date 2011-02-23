@@ -14,6 +14,7 @@ $token_url = $current_url;
 
 $action_map = array();
 $action_map['auth_info'] = array(
+	'app_dom' => array('required'=>true, 'default'=>''),
 	'token'		=> array('required'=>true, 'default'=>''),
 	'api_key'	=> array('required'=>true, 'default'=>''),/* Fill in your API key as the default if you would like. */
 	'format'	=> array('required'=>true, 'default'=>'json'),
@@ -29,11 +30,16 @@ $info_steps['one'] = array (
 $info_steps['two'] = array (
 	'title' => 'step_two_title',
 	'info' => 'step_two_instructions',
-	'trigger' => 'token'
+	'trigger' => 'app_dom'
 );
 $info_steps['three'] = array (
 	'title' => 'step_three_title',
 	'info' => 'step_three_instructions',
+	'trigger' => 'token'
+);
+$info_steps['four'] = array (
+	'title' => 'step_four_title',
+	'info' => 'step_four_instructions',
 	'trigger' => 'api_key'
 );
 
@@ -188,6 +194,7 @@ foreach ($info_steps as $info_step=>$info_vals) {
 		$step_style = 
 '		#'.$info_vals['info'].' {
 			display:block !important;
+			background-color:#FFF !important;
 		}
 		#'.$info_vals['title'].' {
 			color:#000 !important;
@@ -233,7 +240,6 @@ ob_start();
 		</div>
 		<div id="top_ui">
 			<div id="api_menu">
-				<div id="api_menu_title">Engage API</div>
 				<ul id="api_menu_list">
 					<li id="menu_auth_info">auth_info</ol>
 					</li>
@@ -243,37 +249,49 @@ ob_start();
 				<div id="instructions">
 					<div id="step_one" class="instruction_step">
 					<h3 id="step_one_title" class="instruction_title">Step One&nbsp;-&gt;</h3>
-					<p id="step_one_instructions" class="instruction">
-						<a class="rpxnow" onclick="return false;"
-						href="https://tse01-janrain.rpxnow.com/openid/v2/signin?token_url=<?php echo urlencode($token_url); ?>"> Sign In </a><br />
-						This will fill in the (one time use) token.
-					</p>
+					<div id="step_one_instructions" class="instruction">
+						Copy and paste your Application Domain from your <a target="_blank" href="https://rpxnow.com/">Engage dashboard.</a><br />
+						The domain should be a full URL. (e.g. https://myapp.rpxnow.com/) Click submit after pasting the URL.<br />
+						<form id="app_domain_form" method="get">
+							<label for="app_domain_input">Application Domain</label>
+							<input id="app_domain_input" type="text" name="app_dom" value="<?php echo htmlentities($actions['auth_info']['app_dom']); ?>" />
+							<input id="app_domain_submit" type="submit"	name="phpapi" value="submit" />
+						</form>
+					</div>						
 					</div>
 					<div id="step_two" class="instruction_step">
 					<h3 id="step_two_title" class="instruction_title">Step Two&nbsp;-&gt;</h3>
-					<p id="step_two_instructions" class="instruction">
+					<div id="step_two_instructions" class="instruction">
+						<a class="rpxnow" onclick="return false;"					
+						href="<?php echo htmlentities($actions['auth_info']['app_dom']); ?>openid/v2/signin?token_url=<?php echo urlencode($token_url); ?>"> Sign In </a><br />
+						This will fill in the (one time use) token.
+					</div>
+					</div>
+					<div id="step_three" class="instruction_step">
+					<h3 id="step_three_title" class="instruction_title">Step Three&nbsp;-&gt;&nbsp;&nbsp;</h3>
+					<div id="step_three_instructions" class="instruction">
 						Copy your API key from your <a target="_blank" href="https://rpxnow.com/">Engage dashboard.</a><br />
 						Paste the API key in to the apiKey field.<br />
 						Select format and extended(Plus/Pro/Enterprise only) options.
 						Click submit.
-					</p>
 					</div>
-					<div id="step_three" class="instruction_step">
-					<h3 id="step_three_title" class="instruction_title">Step Three&nbsp;&nbsp;</h3>
-					<p id="step_three_instructions" class="instruction">
+					</div>
+					<div id="step_four" class="instruction_step">
+					<h3 id="step_four_title" class="instruction_title">Step Four&nbsp;&nbsp;</h3>
+					<div id="step_four_instructions" class="instruction">
 						You have completed the auth_info API call.<br />
 						This is the point where your code would begin.<br />
 						<a href="<?php echo htmlentities($current_url); ?>">Start over</a>
-					</p>
+					</div>
 					</div>
 					<div id="step_error" class="instruction_step">
 					<h3 id="step_error_title" class="instruction_title">Oops!&nbsp;&nbsp;&nbsp;</h3>
-					<p id="step_error_instructions" class="instruction">
+					<div id="step_error_instructions" class="instruction">
 						Make sure your token URL domain is in your token URL domain list.<br />
 						Remember that tokens are one-time use.<br />
 						Reusing a token can result in "Data not found".<br />
 						<a href="<?php echo htmlentities($current_url); ?>">Start over</a>.
-					</p>
+					</div>
 					</div>
 				</div>
 			</div>
