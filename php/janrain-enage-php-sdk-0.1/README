@@ -1,0 +1,13 @@
+This SDK consists of the engage.lib.php (the SDK) 
+as well as the test console to try it out.
+
+SDK:
+ engage.lib.php
+
+Test Console:
+ index.php
+ index.inc.php
+ style.css
+
+Just place these file in a php served location to
+try it out.

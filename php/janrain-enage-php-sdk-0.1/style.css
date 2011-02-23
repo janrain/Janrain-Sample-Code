@@ -1,0 +1,201 @@
+/**
+ * Copyright 2011
+ * Janrain Inc.
+ * All rights reserved.
+ */
+ #toolkit_wrapper {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	padding:0px;
+	margin:0px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#FFF;
+}
+
+#main_toolkit {
+	position:relative;
+	top:0px;
+	left:0px;
+	width:800px;
+	height:100%;
+	padding:0px;
+	margin:0px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#EEE;
+	font-family: verdana, geneva, arial, helvetica, sans-serif;
+}
+
+#main_toolkit div {
+	padding:0px;
+	margin:0px;
+}
+
+#page_title {
+	position:relative;
+	top:0px;
+	left:0px;
+	height:40px;
+	font-size:30px;
+	font-weight:normal;
+	text-align:center;
+	color:#FFF;
+	background-color:#056;	
+}
+
+#top_ui {
+	position:relative;
+	display:block;
+	width:800px;
+	height:120px;
+	background-color:#EEE;	
+}
+
+#api_menu {
+	float:left;
+	width:100px;
+	height:100%;
+	background-color:#EEF;	
+}
+
+#api_menu_list {
+	margin:0px;
+	padding:4px;
+	font-size:12px;
+	list-style-type:none;
+}
+
+#instructions_wrapper {
+	float:left;
+	width:700px;
+	height:120px;
+	background-color:#DDD;
+}
+
+#instructions {
+	clear:both;
+	position:absolute;
+	top:0px;
+	left:100px;
+	padding:0px;
+	padding-left:10px;
+	background-color:transparent;
+}
+
+.instruction_title {
+	position:absolute;
+	top:0px;
+	padding:0px;
+	margin:0px;
+	width:150px;
+	height:26px;
+	color:#444;	
+	background-color:transparent;
+	text-align:center;
+}
+
+#step_one_title {
+	left:0px;
+}
+
+#step_two_title {
+	left:150px;
+}
+
+#step_three_title {
+	left:300px;
+}
+
+#step_error_title {
+	left:450px;
+}
+
+#step_error_title {
+	display:none;
+}
+
+#step_two:hover .instruction {
+	display:block !important;
+}
+
+#step_three:hover .instruction {
+	display:block !important;
+}
+
+.instruction  {
+	clear:both;
+	position:absolute;
+	padding:10px;
+	margin:0px;
+	top:26px;
+	left:0px;
+	width:680px;
+	height:74px;
+	background-color:#FFF;
+	display:none;
+}
+
+#main_form_wrapper {
+	clear:both;
+	width:800px;
+	height:30px;
+	background-color:#0AD;
+}
+
+#main_form {
+	padding:4px;
+	width:8000px;
+	height:30px;
+	font-size:14px;	
+}
+
+#main_form label {
+	padding-left:6px;
+}
+
+#main_form [type=text] {
+	width:160px;
+}
+
+#output_wrapper {
+	clear:both;
+	width:800px;
+	height:600px;
+	background-color:#EEE;
+}
+
+#results_wrapper {
+	text-align:center;
+}
+
+#raw_results_wrapper {
+	display:none;
+}
+
+#the_raw_results {
+	width:794px;
+	height:300px;
+}
+
+#parse_results_wrapper {
+	display:none;
+}
+
+#the_parse_results {
+	width:794px;
+	height:300px;
+}
+
+#error_wrapper {
+	text-align:center;
+}
+
+#the_errors {
+	display:none;
+	width:794px;
+	height:300px;
+}
