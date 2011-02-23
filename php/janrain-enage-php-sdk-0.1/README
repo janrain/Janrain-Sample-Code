@@ -11,3 +11,10 @@ Test Console:
 
 Just place these file in a php served location to
 try it out.
+
+Requirements:
+ PHP version >= 5
+  Required PHP addons:
+ 	 cURL with SSL
+ 	 JSON
+ 	 simpleXML

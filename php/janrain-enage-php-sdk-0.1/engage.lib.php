@@ -41,6 +41,9 @@ if (!function_exists('engage_lib_init')){
 		define('ENGAGE_JERROR_SYN', ', malformed JSON');
 		define('ENGAGE_XML_ERROR', 'XML error code:');
 		if (ENGAGE_DEV_MODE === true) {
+			if (!version_compare(PHP_VERSION, '5.0.0', '>=')){
+				engage_error('PHP version less than required version');
+			}
 			if (!function_exists('json_decode')) {
 				engage_error('JSON library not found');
 			}
@@ -57,7 +60,10 @@ if (!function_exists('engage_lib_init')){
 }
 
 /* run engage_lib_init */
-engage_lib_init();
+if (!defined('ENGAGE_LIB_DEVMODE')) {
+	define('ENGAGE_LIB_DEVMODE', false);
+}
+engage_lib_init(ENGAGE_LIB_DEVMODE);
 
 /* begin engage_parse_result */
 function engage_parse_result($result, $format, $array_out=ENGAGE_PARSE_ARRAY) {

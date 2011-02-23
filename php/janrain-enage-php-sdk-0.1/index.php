@@ -5,6 +5,7 @@
  * All rights reserved.
  */
 ob_start();
+define('ENGAGE_LIB_DEVMODE', true);//define this as true to enable requirement checks
 require_once('engage.lib.php');
 require_once('index.inc.php');
 
