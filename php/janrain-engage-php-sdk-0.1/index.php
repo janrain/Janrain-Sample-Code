@@ -49,7 +49,7 @@ foreach ($action_map as $action=>$action_def) {
 	foreach ($action_def as $val_name=>$properties) {
 		$val = $properties['default'];
 		if (isset($_REQUEST[$val_name])) {
-			$val = strip_tags($_REQUEST[$val_name]);
+			$val = trim(strip_tags($_REQUEST[$val_name]));
 		}
 		if (!isset($actions[$action])) {
 			$actions[$action] = array();
