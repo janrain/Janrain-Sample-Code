@@ -117,35 +117,59 @@
 	display:none;
 }
 
+#step_one:hover .instruction {
+  top:22px;
+	left:0px;
+	border:2px solid #666;
+	display:block;
+	z-index:2;	
+}
+
 #step_two:hover .instruction {
-	display:block !important;
+  top:22px;
+	left:95px;
+	border:2px solid #666;
+	display:block;
+	z-index:2;	
 }
 
 #step_three:hover .instruction {
-	display:block !important;
+  top:22px;
+	left:235px;
+	border:2px solid #666;
+	display:block;
+	z-index:2;
 }
 
 #step_four:hover .instruction {
-	display:block !important;
+  top:22px;
+	left:375px;
+	border:2px solid #666;
+	display:block;
 }
 
-.instruction  {
+.instruction {
 	position:absolute;
 	padding:10px;
 	margin:0px;
+	border:0px;
 	top:26px;
 	left:0px;
-	width:780px;
-	height:75px;
-	background-color:#DDD;
+	width:390px;
+	height:55px;
+	background-color:#EEE;
 	display:none;
-	font-size:14px;	
+	font-size:10px;	
 }
 
 #app_domain_form {
 	width:700px;
 	height:40px;
 	display:inline;
+}
+
+#app_domain_input {
+	width:200px;
 }
 
 #main_form_wrapper {

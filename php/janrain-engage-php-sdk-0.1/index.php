@@ -194,13 +194,19 @@ $step_style = '';
 foreach ($info_steps as $info_step=>$info_vals) {
 	if ($actions['auth_info'][$info_vals['trigger']] != ''){
 		$step_style = 
-'		#'.$info_vals['info'].' {
-			display:block !important;
-			background-color:#FFF !important;
+'		#instructions #'.$info_vals['info'].' {
+			width:780px;
+			height:75px;
+			display:block;
+			border:0px;
+			top:26px;
+			left:0px;
+			background-color:#FFF;
+			font-size:13px;
 		}
-		#'.$info_vals['title'].' {
-			color:#000 !important;
-			background-color:#FFF !important;
+		#instructions #'.$info_vals['title'].' {
+			color:#000;
+			background-color:#FFF;
 		}
 ';
 	}
@@ -208,11 +214,13 @@ foreach ($info_steps as $info_step=>$info_vals) {
 
 if ($engage_error === true || !empty($the_error)){
 	$step_style = 
-'		#step_error_instructions {
+'		#instructions ##step_error_instructions {
+			width:780px !important;
+			height:75px !important;
 			display:block !important;
 			background-color:#FDD !important;			
 		}
-		#step_error_title {
+		#instructions ##step_error_title {
 			display:block !important;
 			color:#000 !important;
 			background-color:#FDD !important;
