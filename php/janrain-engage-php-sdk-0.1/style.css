@@ -146,6 +146,7 @@
 	left:375px;
 	border:2px solid #666;
 	display:block;
+	z-index:2;	
 }
 
 .instruction {
