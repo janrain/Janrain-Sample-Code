@@ -191,8 +191,9 @@ if(!empty($the_error)) {
 }
 
 $step_style = '';
+$step_missed = false;
 foreach ($info_steps as $info_step=>$info_vals) {
-	if ($actions['auth_info'][$info_vals['trigger']] != ''){
+	if ($actions['auth_info'][$info_vals['trigger']] != '' && $step_missed === false){
 		$step_style = 
 '		#instructions #'.$info_vals['info'].' {
 			width:780px;
@@ -209,6 +210,8 @@ foreach ($info_steps as $info_step=>$info_vals) {
 			background-color:#FFF;
 		}
 ';
+	} else {
+		$step_missed = true;
 	}
 }
 
