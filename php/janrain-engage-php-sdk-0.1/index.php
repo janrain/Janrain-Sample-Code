@@ -9,6 +9,8 @@ define('ENGAGE_LIB_DEVMODE', true);//define this as true to enable requirement c
 require_once('engage.lib.php');
 require_once('index.inc.php');
 
+$base_request = str_ireplace('?'.$_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
+$base_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$base_request;
 $current_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
 $token_url = $current_url;
 
@@ -234,6 +236,7 @@ ob_start();
 	</style>
 </head>
 <body>
+<?php //print_r($_SERVER); exit; ?>
 	<div id="toolkit_wrapper">
 	<div id="main_toolkit">
 		<div id="page_title">
@@ -291,7 +294,7 @@ ob_start();
 						Make sure your token URL domain is in your token URL domain list.<br />
 						Remember that tokens are one-time use.<br />
 						Reusing a token can result in "Data not found".<br />
-						<a href="<?php echo htmlentities($current_url); ?>">Start over</a>.
+						<a href="<?php echo htmlentities($base_url); ?>">Start over</a>.
 					</div>
 					</div>
 				</div>
