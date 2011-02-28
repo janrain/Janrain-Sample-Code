@@ -208,11 +208,12 @@ if ($engage_error === true || !empty($the_error)){
 	$step_style = 
 '		#step_error_instructions {
 			display:block !important;
+			background-color:#FDD !important;			
 		}
 		#step_error_title {
 			display:block !important;
 			color:#000 !important;
-			background-color:#FFF !important;
+			background-color:#FDD !important;
 		}
 ';
 }
@@ -268,7 +269,7 @@ ob_start();
 					</div>
 					</div>
 					<div id="step_three" class="instruction_step">
-					<h3 id="step_three_title" class="instruction_title">Step Three&nbsp;-&gt;&nbsp;&nbsp;</h3>
+					<h3 id="step_three_title" class="instruction_title">Step Three&nbsp;-&gt;</h3>
 					<div id="step_three_instructions" class="instruction">
 						Copy your API key from your <a target="_blank" href="https://rpxnow.com/">Engage dashboard.</a><br />
 						Paste the API key in to the apiKey field.<br />
@@ -277,7 +278,7 @@ ob_start();
 					</div>
 					</div>
 					<div id="step_four" class="instruction_step">
-					<h3 id="step_four_title" class="instruction_title">Step Four&nbsp;&nbsp;</h3>
+					<h3 id="step_four_title" class="instruction_title">Step Four&nbsp;&nbsp;&nbsp;</h3>
 					<div id="step_four_instructions" class="instruction">
 						You have completed the auth_info API call.<br />
 						This is the point where your code would begin.<br />

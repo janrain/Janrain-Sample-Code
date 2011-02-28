@@ -30,11 +30,6 @@
 	font-family: verdana, geneva, arial, helvetica, sans-serif;
 }
 
-#main_toolkit div {
-	padding:0px;
-	margin:0px;
-}
-
 #page_title {
 	position:relative;
 	top:0px;
@@ -140,8 +135,8 @@
 	margin:0px;
 	top:26px;
 	left:0px;
-	width:800px;
-	height:95px;
+	width:780px;
+	height:75px;
 	background-color:#DDD;
 	display:none;
 	font-size:14px;	
