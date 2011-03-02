@@ -5,10 +5,20 @@
  * All rights reserved.
  */
 ob_start();
+$the_error = '';
 define('ENGAGE_LIB_DEVMODE', true);//define this as true to enable requirement checks
-require_once('engage.lib.php');
-require_once('index.inc.php');
+if (file_exists('../engage.lib.php')) {
+  require_once('../engage.lib.php');
+}else{
+	$the_error .= '../engage.lib.php not found';
+}
+if (file_exists('index.inc.php')) {
+	require_once('index.inc.php');
+} else {
+	$the_error .= 'index.inc.php not found';
+}
 
+$site_domain = $_SERVER['SERVER_NAME'];
 $base_request = str_ireplace('?'.$_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
 $base_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$base_request;
 $current_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
@@ -223,14 +233,14 @@ if ($engage_error === true || !empty($the_error)){
 			border:0px;
 			top:26px;
 			left:0px;
-			background-color:#FDD;
+			background-color:#FEE;
 			font-size:13px;
 			display:block;			
 		}
 		#instructions #step_error_title {
 			display:block;
 			color:#000;
-			background-color:#FDD;
+			background-color:#FEE;
 		}
 ';
 }
@@ -245,7 +255,7 @@ ob_start();
 	<head>
 	<meta charset="UTF-8" />
 	<title>Janrain Engage API console</title>
-	<link rel="stylesheet" href="style.css" media="screen" />
+	<link rel="stylesheet" type="text/css" media="screen" href="style.css" />
 	<style type="text/css">
 <?php echo $style; ?>
 	</style>
@@ -281,9 +291,15 @@ ob_start();
 					<div id="step_two" class="instruction_step">
 					<h3 id="step_two_title" class="instruction_title">Step Two&nbsp;-&gt;</h3>
 					<div id="step_two_instructions" class="instruction">
-						<a class="rpxnow" onclick="return false;"					
+						<div id="whitelist_note" class="note">
+							You may need to whitelist your current domain. <br />
+							<a target="_blank" href="https://rpxnow.com/">Engage dashboard</a>-&gt;Settings-&gt;<br />
+							&nbsp;add&nbsp;"<?php echo htmlentities($site_domain); ?>" to "Token URL Domains"
+						</div>
+						Click <a class="rpxnow" onclick="return false;"					
 						href="<?php echo htmlentities($actions['auth_info']['app_dom']); ?>openid/v2/signin?token_url=<?php echo urlencode($token_url); ?>"> Sign In </a><br />
-						This will fill in the (one time use) token.
+						This will fill in the token.<br />
+						The token is one time use by default.
 					</div>
 					</div>
 					<div id="step_three" class="instruction_step">
@@ -355,26 +371,26 @@ ob_start();
 				<form id="results_form">
 					<div id="raw_results_wrapper">
 						<div id="raw_results_title">The response:</div>
-						<textarea id="the_raw_results">
+						<div id="the_raw_results" class="results"><pre>
 <?php echo htmlentities($the_raw_result); ?>
 
-						</textarea>
+						</pre></div>
 					</div>
 					<div id="parse_results_wrapper">
 						<div id="parse_results_title">The parsed (as an array) response:</div>					
-						<textarea id="the_parse_results">
+						<div id="the_parse_results" class="results"><pre>
 <?php echo htmlentities($the_parse_result); ?>
 
-						</textarea>
+						</pre></div>
 					</div>
 				</form>
 			</div>
 			<div id="error_wrapper">
 				<form id="error_form">
-					<textarea id="the_errors">
+					<div id="the_errors" class="results"><pre>
 <?php echo htmlentities($the_error); ?>
 
-					</textarea>
+					</pre></div>
 				</form>
 			</div>
 		</div>

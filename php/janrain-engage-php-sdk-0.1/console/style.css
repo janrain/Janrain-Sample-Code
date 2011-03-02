@@ -163,6 +163,10 @@
 	font-size:10px;	
 }
 
+.note {
+	float:right;
+}
+
 #app_domain_form {
 	width:700px;
 	height:40px;
@@ -210,18 +214,8 @@
 	display:none;
 }
 
-#the_raw_results {
-	width:794px;
-	height:300px;
-}
-
 #parse_results_wrapper {
 	display:none;
-}
-
-#the_parse_results {
-	width:794px;
-	height:300px;
 }
 
 #error_wrapper {
@@ -230,6 +224,14 @@
 
 #the_errors {
 	display:none;
+}
+
+.results {
+  text-align:left;
+  overflow:auto;
+	border:1px solid #888;
 	width:794px;
 	height:300px;
+	background-color:#FFF;
 }
+

@@ -9,8 +9,8 @@ Test Console:
  index.inc.php
  style.css
 
-Just place these file in a php served location to
-try it out.
+Just place the folder in a php enabled location then
+load the console folder location in your browser.
 
 Requirements:
  PHP version >= 5
