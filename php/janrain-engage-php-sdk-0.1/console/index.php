@@ -8,7 +8,7 @@ ob_start();
 $the_error = '';
 define('ENGAGE_LIB_DEVMODE', true);//define this as true to enable requirement checks
 if (file_exists('../engage.lib.php')) {
-  require_once('../engage.lib.php');
+	require_once('../engage.lib.php');
 }else{
 	$the_error .= '../engage.lib.php not found';
 }
@@ -261,7 +261,6 @@ ob_start();
 	</style>
 </head>
 <body>
-<?php //print_r($_SERVER); exit; ?>
 	<div id="toolkit_wrapper">
 	<div id="main_toolkit">
 		<div id="page_title">

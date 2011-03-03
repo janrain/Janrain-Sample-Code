@@ -2,15 +2,20 @@ This SDK consists of the engage.lib.php (the SDK)
 as well as the test console to try it out.
 
 SDK:
+Currently only has auth_info implemented.
  engage.lib.php
 
+Example Token URL PHP:
+A small example token URL script that uses the library.
+ rpx-token-url.php
+
 Test Console:
+Just place the SDK folder in a php enabled location 
+then load the console folder location in your browser.
  index.php
  index.inc.php
  style.css
 
-Just place the folder in a php enabled location then
-load the console folder location in your browser.
 
 Requirements:
  PHP version >= 5

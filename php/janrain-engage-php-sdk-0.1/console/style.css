@@ -178,7 +178,6 @@
 }
 
 #main_form_wrapper {
-	clear:both;
 	width:800px;
 	height:30px;
 	background-color:#0AD;
@@ -234,4 +233,3 @@
 	height:300px;
 	background-color:#FFF;
 }
-
