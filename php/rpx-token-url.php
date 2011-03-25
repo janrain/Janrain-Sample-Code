@@ -1,5 +1,5 @@
-<html><head><title>Janrain Engage example</title></head><body><pre>
 <?php
+ob_start();
 /*
  Below is a very simple and verbose PHP 5 script that implements the Engage token URL processing and some popular Pro/Enterprise examples.
  The code below assumes you have the CURL HTTP fetching library with SSL.  
@@ -19,9 +19,9 @@ $token = $_POST['token'];
 
 //Some output to help debugging
 echo "SERVER VARIABLES:\n";
-print_r($_SERVER);
+var_dump($_SERVER);
 echo "HTTP POST ARRAY:\n";
-print_r($_POST);
+var_dump($_POST);
 
 if(strlen($token) == 40) {//test the length of the token; it should be 40 characters
 
@@ -264,5 +264,18 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
   // Gracefully handle the missing or malformed token.  Hook this into your native error handling system.
   echo 'Authentication canceled.';
 }
+$debug_out = ob_get_contents();
+ob_end_clean();
 ?>
-</pre></body>
+<html>
+<head>
+<title>Janrain Engage example</title>
+</head>
+<body>
+<!-- content -->
+<pre>
+<?php echo $debug_out; ?>
+</pre>
+<!-- javascript -->
+</body>
+</html>
