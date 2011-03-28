@@ -250,7 +250,7 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
 
     /* STEP 4: Use the identifier as the unique key to sign the user into your system.
        This will depend on your website implementation, and you should add your own
-       code here.
+       code here. The user profile is in $auth_info.
     */
 
     } else {
