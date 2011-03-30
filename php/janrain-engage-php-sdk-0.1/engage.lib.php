@@ -26,8 +26,11 @@ if (!function_exists('engage_lib_init')){
 		define('ENGAGE_KEY_TOKEN', 'token');
 		define('ENGAGE_KEY_FORMAT', 'format');
 		define('ENGAGE_KEY_EXTEND', 'extended');
+		define('ENGAGE_KEY_IDENTIFIER', 'identifier');
 		define('ENGAGE_API_BASE_URL', 'https://rpxnow.com/api/v2/');
 		define('ENGAGE_AUTHINFO_EP', 'auth_info');
+		define('ENGAGE_GETCONTACTS_EP', 'get_contacts');
+		define('ENGAGE_GETCONTACTS_PROVIDERS', 'Google,Yahoo,Windows Live,Facebook,MySpace,Twitter,LinkedIn');
 		define('ENGAGE_ELABEL_DEBUG', 'debug');
 		define('ENGAGE_ELABEL_MESSAGE', 'message');
 		define('ENGAGE_ELABEL_WARN', 'warning');
@@ -40,6 +43,7 @@ if (!function_exists('engage_lib_init')){
 		define('ENGAGE_JERROR_CHAR', ', unexpected character found');
 		define('ENGAGE_JERROR_SYN', ', malformed JSON');
 		define('ENGAGE_XML_ERROR', 'XML error code:');
+		define('ENGAGE_IDENTIFIER_ERROR', 'missing identifier');
 		if (ENGAGE_DEV_MODE === true) {
 			if (!version_compare(PHP_VERSION, '5.0.0', '>=')){
 				engage_error('PHP version less than required version');
@@ -121,7 +125,11 @@ function engage_parse_result($result, $format, $array_out=ENGAGE_PARSE_ARRAY) {
 }
 /* end engage_parse_result */
 
-/* begin enage_auth_info */
+/* begin engage_auth_info */
+/**
+ * https://rpxnow.com/docs#api_auth_info
+ * Extended requires subscription level of Plus or better.
+ */
 function engage_auth_info($api_key, $token, $format=ENGAGE_FORMAT_JSON, $extended=ENGAGE_AUTH_EXTEND) {
 	if ($extended === true) {
 		$extended = 'true';
@@ -156,9 +164,63 @@ function engage_auth_info($api_key, $token, $format=ENGAGE_FORMAT_JSON, $extende
 }
 /* end engage_auth_info */
 
+/* begin engage_get_contacts */
+/**
+ * https://rpxnow.com/docs#api_get_contacts
+ * To use get_contacts requires a subscription level of Pro or better.
+ * It is not recommended to use API call as part of sign in.
+ * Users with large numbers of friends will notice the delay.
+ * Setup an asynchronous call to collect this (e.g. iframe or server-side script).
+ */
+function engage_get_contacts($api_key, $identifier, $format=ENGAGE_FORMAT_JSON) {
+	$ready = true;
+	if (strlen($api_key) != ENGAGE_API_KEY_LEN) {
+		engage_error(ENGAGE_API_KEY_ERROR);
+		$ready = false;
+	}
+	if (empty($identifier)) {
+		engage_error(ENGAGE_IDENTIFIER_ERROR);
+		$ready = false;
+	}
+	if (!in_array($format, explode(',',ENGAGE_FORMATS))) {
+		engage_error(ENGAGE_FORMAT_ERROR);
+		$ready = false;
+	}
+	if ($ready === true){
+		$url = ENGAGE_API_BASE_URL.ENGAGE_GETCONTACTS_EP;
+		$parameters = array(
+			ENGAGE_KEY_APIKEY => $api_key,
+			ENGAGE_KEY_IDENTIFIER => $identifier,
+			ENGAGE_KEY_FORMAT => $format
+		);
+		$result = engage_post($url, $parameters);
+		return $result;
+	}
+	return false;
+}
+/* end engage_get_contacts */
+
+/* begin engage_get_contacts_provider */
+/**
+ * Test if provider is valid for get_contacts
+ */
+function engage_get_contacts_provider($provider) {
+	$provider_array = explode(',', ENGAGE_GETCONTACTS_PROVIDERS);
+	if (in_array($provider, $provider_array)) {
+		return true;
+	}
+	return false;
+}
+/* end engage_get_contacts_provider */
+
 /* begin engage_post */
 function engage_post($url, $parameters, $ssl=ENGAGE_POST_SSL) {
 	$curl = curl_init();
+	if ($curl == false) {
+		engage_error(ENGAGE_CURL_ERROR);
+		return false;
+	}
+	engage_error('parameters: ' . print_r($parameters, true), ENGAGE_ELABEL_DEBUG);	
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($curl, CURLOPT_URL, $url);
 	curl_setopt($curl, CURLOPT_POST, true);
@@ -170,7 +232,7 @@ function engage_post($url, $parameters, $ssl=ENGAGE_POST_SSL) {
 	if ($result == false) {
 		engage_error('Curl error: ' . curl_error($curl));
 		engage_error('HTTP code: ' . curl_errno($curl));
-		engage_error('parameters: ' . print_r($post_data, true));
+		engage_error('parameters: ' . print_r($parameters, true));
 		curl_close($curl);
 	} else {
 		curl_close($curl);
@@ -181,7 +243,7 @@ function engage_post($url, $parameters, $ssl=ENGAGE_POST_SSL) {
 /* end engage_post */
 
 /* begin engage_error */
-function engage_error($error, $label=ENGAGE_ELABEL_DEBUG){
+function engage_error($error, $label=ENGAGE_ELABEL_ERROR){
 	global $engage_errors;
 	if (!is_array($engage_errors)){
 		$engage_errors = array();

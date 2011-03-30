@@ -1,13 +1,17 @@
-This SDK consists of the engage.lib.php (the SDK) 
-as well as the test console to try it out.
+This SDK consists of the engage.lib.php (the SDK),
+ the test console to try it out, and some samples.
 
 SDK:
-Currently only has auth_info implemented.
+Currently only has auth_info and get_contacts implemented.
  engage.lib.php
 
 Example Token URL PHP:
 A small example token URL script that uses the library.
- rpx-token-url.php
+ engage-token-url.php
+  Uses:
+    engage.lib.php
+    engage-contacts.php
+    engage-conf.php
 
 Test Console:
 Just place the SDK folder in a php enabled location 
