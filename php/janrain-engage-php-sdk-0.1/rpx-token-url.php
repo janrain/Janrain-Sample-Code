@@ -5,10 +5,10 @@
  */
 ob_start();
 require_once('engage.lib.php');
-$the_output_array = array();
+$debug_array = array('Debug out:');
 
 /**
- *For a production script it would be better to include the apiKey in from a file outside the web root to enhance security.
+ *For a production script it would be better to include (require_once) the apiKey in from a file outside the web root to enhance security.
  */
 $api_key = 'YOUR API KEY HERE';//<- API KEY HERE
 
@@ -20,19 +20,21 @@ $result = engage_auth_info($api_key, $token, $format, $extended);
 if ($result === false) {
 	$errors = engage_get_errors();
 	foreach ($errors as $error=>$label) {
-		$the_output_array[] = 'Error: '.$error;
+		$debug_array[] = 'Error: '.$error;
 	}
 } else {
 	$array_out = true;
+/* On a successful authentication the variable (array) $auth_info_array will contain the resulting data. */
 	$auth_info_array = engage_parse_result($result, $format, $array_out);
-	$the_output_array = print_r($auth_info_array, true);
+	$debug_array = print_r($auth_info_array, true);
 }
 
 $the_buffer = ob_get_contents();
 if (!empty($the_buffer)) {
-	$the_output_array[] = 'Buffer: '.$the_buffer;
+	$debug_array[] = 'Buffer: '.$the_buffer;
 }
-$the_output = implode("\n", $the_output_array);
+/* The variable (string) $the_output will contain debug data
+$the_debug = implode("\n", $debug_array);
 ob_end_clean();
 ?>
 <html>
@@ -41,7 +43,7 @@ ob_end_clean();
 	</head>
 	<body>
 		<pre>
-<?php echo $the_output; ?>
+<?php echo $the_debug; ?>
 		</pre>
 	</body>
 </html>
