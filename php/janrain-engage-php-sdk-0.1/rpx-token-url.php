@@ -33,7 +33,7 @@ $the_buffer = ob_get_contents();
 if (!empty($the_buffer)) {
 	$debug_array[] = 'Buffer: '.$the_buffer;
 }
-/* The variable (string) $the_output will contain debug data
+/* The variable (string) $the_debug will contain debug data. */
 $the_debug = implode("\n", $debug_array);
 ob_end_clean();
 ?>
