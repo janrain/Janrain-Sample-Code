@@ -24,16 +24,12 @@ $debug_array = array('Debug out:');
  * enhance security.
  * 
  * Set your API key (secret) in this file.
- * The varable set by this is $api_key;
+ * The varable is $api_key
+ *
+ * Set the "Pro" status in this file.
+ * The variable is $engage_pro
  */
 require_once('engage-conf.php');
-
-/**
- * Set $engage_pro to true if you have
- * a Pro or better subscription.
- * This enables get_contacts.
- */
-$engage_pro = false;
 
 $token = $_POST['token'];
 $format = ENGAGE_FORMAT_JSON;
@@ -89,9 +85,6 @@ ob_end_clean();
 		<title>Janrain Engage token URL example</title>
 	</head>
 	<body>
-		<pre>
-<?php echo $the_debug; ?>
-		</pre>
 <?php 
 /**
  * For this get_contacts sample to work you 
@@ -100,11 +93,15 @@ ob_end_clean();
 if ($go_contacts === true) {  
 ?>
 		<h4>get_contacts</h4>
+		<p>Loaded in an iframe with a trigger link to allow the parent page to render while this loads.</p>
 		<iframe src="engage-contacts.php?identifier=<?php 
 		echo urlencode($auth_info_array['profile']['identifier']); 
-		?>" style="width:100%; height:240px;"></iframe>
+		?>" style="width:100%;height:240px"></iframe>
 <?php 
 } 
 ?>
+		<pre>
+<?php echo $the_debug; ?>
+		</pre>
 	</body>
 </html>

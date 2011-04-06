@@ -38,22 +38,27 @@ $info_steps['one'] = array (
 	'title' => 'step_one_title',
 	'info' => 'step_one_instructions',
 	'trigger' => 'format'
-);
+	);
 $info_steps['two'] = array (
 	'title' => 'step_two_title',
 	'info' => 'step_two_instructions',
 	'trigger' => 'app_dom'
-);
+	);
 $info_steps['three'] = array (
 	'title' => 'step_three_title',
 	'info' => 'step_three_instructions',
 	'trigger' => 'token'
-);
+	);
 $info_steps['four'] = array (
 	'title' => 'step_four_title',
 	'info' => 'step_four_instructions',
 	'trigger' => 'api_key'
-);
+	);
+$info_steps['five'] = array (
+	'title' => 'step_five_title',
+	'info' => 'step_five_instructions',
+	'trigger' => 'identifier'
+	);
 
 $actions = array();
 foreach ($action_map as $action=>$action_def) {
@@ -93,6 +98,7 @@ while (list($action, $vals) = each($actions)) {
 					$actions['parse_result'] = array(
 						'result' => $result,
 						'format' => $vals['format'],
+						'export' => array('identifier' => array('profile','identifier')),
 						'do' => true
 					);
 					if ($vals['format'] == 'json') {
@@ -117,10 +123,34 @@ while (list($action, $vals) = each($actions)) {
 					if (is_array($parse_result)) {
 						if (isset($parse_result['err'])) {
 							$engage_error = true;
+						} elseif (is_array($vals['export'])) {
+							foreach ($vals['export'] as $export_name => $export_path) {
+								$export_val = '';
+								foreach ($export_path as $e_key => $e_path) {
+									if (empty($export_path)) {
+										$export_val = $parse_result["$e_path"];
+									} else {
+										$export_val = $export_val["$e_path"];
+									}
+								}
+								$$export_name = $export_val = '';
+							}
 						}
 					} elseif (is_object($parse_result)) {
 						if ($parse_result->err != '') {
 							$engage_error = true;
+						} elseif (is_array($vals['export'])) {
+							foreach ($vals['export'] as $export_name => $export_path) {
+								$export_val = '';
+								foreach ($export_path as $e_key => $e_path) {
+									if (empty($export_path)) {
+										$export_val = $parse_result->$e_path;
+									} else {
+										$export_val = $export_val->$e_path;
+									}
+								}
+								$$export_name = $export_val = '';
+							}
 						}
 					}
 					$actions['parse_dump'] = array(
@@ -329,6 +359,14 @@ ob_start();
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="instruction">
+		<div id="step_five" class="instruction_step">
+		<h3 id="step_five_title" class="instruction_title">Indentifier Collected</h3>
+		<div id="step_five_instructions" class="instruction">
+		Hi <?php echo $identifier; ?>
+		</div>
+		</div>
 		</div>
 		<div id="main_form_wrapper">
 			<form id="main_form" method="post">

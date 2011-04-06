@@ -4,7 +4,20 @@
  * Janrain Inc.
  * All rights reserved.
  */
-
+if ($_GET['go'] != 'true') {
+?>
+<html>
+<head>
+</head>
+<body>
+<p>
+	<a href="engage-contacts.php?go=true&identifier=<?php echo $_GET['identifier']; ?>">Click here to load your friends</a>
+</p>
+</body>
+</html>
+<?php
+	exit;
+}
 ob_start();
 
 require_once('engage.lib.php');
