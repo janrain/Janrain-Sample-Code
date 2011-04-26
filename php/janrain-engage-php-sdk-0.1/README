@@ -19,6 +19,7 @@ then load the console folder location in your browser.
  index.php
  index.inc.php
  style.css
+ console.conf.php
 
 
 Requirements:

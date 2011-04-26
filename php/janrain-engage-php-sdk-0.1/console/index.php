@@ -6,7 +6,11 @@
  */
 ob_start();
 $the_error = '';
-define('ENGAGE_LIB_DEVMODE', true);//define this as true to enable requirement checks
+if (file_exists('console.conf.php')) {
+	require_once('console.conf.php');
+} else {
+	$the_error .= 'console.conf.php not found';
+}
 if (file_exists('../engage.lib.php')) {
 	require_once('../engage.lib.php');
 }else{
@@ -18,17 +22,26 @@ if (file_exists('index.inc.php')) {
 	$the_error .= 'index.inc.php not found';
 }
 
+
 $site_domain = $_SERVER['SERVER_NAME'];
 $base_request = str_ireplace('?'.$_SERVER['QUERY_STRING'], '', $_SERVER['REQUEST_URI']);
 $base_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$base_request;
 $current_url = 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
 $token_url = $current_url;
 
+$forty_stars = '****************************************';
+
+if (ENGAGE_CONSOLE_API_KEY != ''){
+	$api_key_default = $forty_stars;
+} else {
+	$api_key_default = '';
+}
+
 $action_map = array();
 $action_map['auth_info'] = array(
-	'app_dom' => array('required'=>true, 'default'=>''),
+	'app_dom' => array('required'=>true, 'default'=>ENGAGE_CONSOLE_APP_DOM),
 	'token'		=> array('required'=>true, 'default'=>''),
-	'api_key'	=> array('required'=>true, 'default'=>''),/* Fill in your API key as the default if you would like. */
+	'api_key'	=> array('required'=>true, 'default'=>$forty_stars),/* Fill in your API key in the console.conf.php. */
 	'format'	=> array('required'=>true, 'default'=>'json'),
 	'extended'=> array('required'=>false, 'default'=>'')
 );
@@ -90,6 +103,9 @@ while (list($action, $vals) = each($actions)) {
 				$extended = false;
 				if ($vals['extended'] == 'true') {
 					$extended = true;
+				}
+				if ( $vals['api_key'] == $forty_stars && ENGAGE_CONSOLE_API_KEY != '' ) {
+					$vals['api_key'] = ENGAGE_CONSOLE_API_KEY;
 				}
 				$result = engage_auth_info($vals['api_key'], $vals['token'], $vals['format'], $extended);
 				if ($result === false) {
@@ -223,17 +239,18 @@ if (isset($the_errors)) {
 	}
 }
 
-if(!empty($the_error)) {
+if (!empty($the_error)) {
 	$style .= '		#the_errors {
 			display:block;
 		}
 ';
 }
 
+
 $step_style = '';
 $step_missed = false;
 foreach ($info_steps as $info_step=>$info_vals) {
-	if ($actions['auth_info'][$info_vals['trigger']] != '' && $step_missed === false){
+	if ( !empty($actions['auth_info'][$info_vals['trigger']]) && $step_missed === false){
 		$step_style = 
 '		#instructions #'.$info_vals['info'].' {
 			width:780px;
