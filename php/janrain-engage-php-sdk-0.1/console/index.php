@@ -41,7 +41,7 @@ $action_map = array();
 $action_map['auth_info'] = array(
 	'app_dom' => array('required'=>true, 'default'=>ENGAGE_CONSOLE_APP_DOM),
 	'token'		=> array('required'=>true, 'default'=>''),
-	'api_key'	=> array('required'=>true, 'default'=>$forty_stars),/* Fill in your API key in the console.conf.php. */
+	'api_key'	=> array('required'=>true, 'default'=>$api_key_default),/* Fill in your API key in the console.conf.php. */
 	'format'	=> array('required'=>true, 'default'=>'json'),
 	'extended'=> array('required'=>false, 'default'=>'')
 );
