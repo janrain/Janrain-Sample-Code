@@ -133,12 +133,12 @@ if (is_array($auth_info_array)) {
 <?php //echo $the_debug; ?>
     </pre>
     <script type="text/javascript">
-<?php if ($_GET['iframe'] == 'true') { ?>
-      self.parent.authDone(true);
-<?php } else { ?>
+<?php if ($_GET['custom_ui'] == 'true') { ?>
       window.opener.parent.authDone(false);
       window.opener.checkProviderCookie();
       self.close();
+<?php } else { ?>
+      self.parent.authDone(true);
 <?php } ?>
     </script>
   </body>
