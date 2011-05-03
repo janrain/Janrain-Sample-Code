@@ -12,9 +12,9 @@ if (file_exists('console.conf.php')) {
 	$the_error .= 'console.conf.php not found';
 }
 if (file_exists('../engage.lib.php')) {
-	require_once('../engage.lib.php');
+	require_once('../libary/engage.lib.php');
 }else{
-	$the_error .= '../engage.lib.php not found';
+	$the_error .= '../library/engage.lib.php not found';
 }
 if (file_exists('index.inc.php')) {
 	require_once('index.inc.php');

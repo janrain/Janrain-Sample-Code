@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title>Sample Site Demo</title>
+  <link href="demo.css" media="screen" rel="stylesheet" type="text/css" />
+  <script src="demo.js"></script>
+</head>
+<body onload="signIn()">
+  <div id="header">
+    <div id="logo"></div><div id="slogan">Engage Demo</div>
+  </div>
+  <div id="main">
+    <div id="menu">[<div id="sign_in_out" class="item" onclick="signInOut()"></div>]<div id="user_profile" class="item" onclick="userProfile()"></div></div>
+    <div id="the_content"><div id="the_profile"></div></div>
+    <div id="sign_in">
+    <div id="sign_in_label">Sign in to import your identity.</div>
+      <div id="sign_in_feedback" class="sign_in_box"></div>
+      <iframe id="the_buttons" class="sign_in_box" src="./custom-ui/"></iframe>
+      <iframe id="the_widget" class="sign_in_box" src="<!-- REPLACE WITH IFRAME SRC FROM DASHBOARD USING THE URL TO THIS DIRECTORY PLUS token/ as the token URL -->" scrolling="no"></iframe>
+    </div>
+    <div id="register">
+      <form action="" id="reg_form" class="simple_form" onsubmit="return validateForm()">
+        <label for="user_name">Username: <span class="form_required" title="This field is required.">*</span></label>
+        <input type="text" name="user_name" id="user_name" value="" class="form_text required">
+        <br>
+        <label for="first_name">First Name: <span class="form_required" title="This field is required.">*</span></label>
+        <input type="text" name="first_name" id="first_name" value="" class="form_text required">
+        <br>
+        <label for="last_name">Last Name: <span class="form_required" title="This field is required.">*</span></label>
+        <input type="text" name="last_name" id="last_name" value="" class="form_text required">
+        <br>
+        <label for="email">Email: </label>
+        <input type="text" maxlength="128" name="email" id="email" value="" class="form_text">
+        <br>
+        <label for="profile_url">Profile URL: </label>
+        <input type="text" name="profile_url" id="profile_url" value="" class="form_text">
+        <br>
+        <label for="phone">Phone: </label>
+        <input type="text" name="phone" id="phone" value="" class="form_text">
+        <br>
+        <label for="company">Company:</label>
+        <input type="text" name="company" id="company" value="" class="form_text">
+        <br>
+        <input type="hidden" name="identifier" id="identifier" class="form_text" value="" />
+        <input type="submit" name="register" id="register_button" value="register" /><input type="reset" name="clear" id="clear_button" value="clear" />
+      </form>
+      <div id="reg_form_helper"></div>    
+    </div>
+    <div id="debug"></div>
+  </div>
+</body>
+</html>

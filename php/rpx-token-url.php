@@ -244,6 +244,26 @@ if(strlen($token) == 40) {//test the length of the token; it should be 40 charac
         curl_close($curl);
         echo "\nGRAPH 'me' profile:";
         echo "\n"; var_dump($graph_me);
+
+        //Pull the "likes"
+        $url = 'https://graph.facebook.com/'.$auth_info['accessCredentials']['uid'].'?access_token='.urlencode($auth_info['accessCredentials']['accessToken']);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_FAILONERROR, true);
+        $result = curl_exec($curl);
+        if ($result == false){
+          echo "\n".'URL:'.$url;
+          echo "\n".'Curl error: ' . curl_error($curl);
+          echo "\n".'HTTP code: ' . curl_errno($curl);
+          echo "\n"; var_dump($post_data);
+        }
+        $graph_likes = json_decode($result);
+        curl_close($curl);
+        echo "\nGRAPH 'likes':";
+        echo "\n"; var_dump($graph_likes);        
       }
     }
 
