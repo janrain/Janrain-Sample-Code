@@ -5,7 +5,7 @@ $stat = 'ok';
 session_name('engage');
 @session_start();
 $session = $_SESSION;
-if ( !empty($session['authinfo']['profile']['identifier']) && function_exists('SQLite3') ) {
+if ( !empty($session['authinfo']['profile']['identifier']) && class_exists('SQLite3') ) {
   $user = array();
   $user['user_name'] = '';
   $user['first_name'] = '';
