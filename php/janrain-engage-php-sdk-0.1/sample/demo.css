@@ -1,3 +1,13 @@
+#load_mask {
+  display:block;
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  z-index:1000;
+  background-color:#FFFFFF;
+}
 #header,
 #main {
   width:800px;
@@ -41,7 +51,7 @@
   padding:0;
   padding-bottom:6px;
 }
-#menu div {
+#menu *.item {
   display:inline;
   height:34px;
   margin-left:5px;
@@ -54,8 +64,8 @@
 }
 #sign_in,
 #register,
-#the_cintent {
-  display:none;
+#the_content {
+  display:block;
   position:relative;
   top:35px;
 }
@@ -80,7 +90,7 @@
   float:left;
 }
 #the_buttons {
-  display:none;
+  display:block;
   position:absolute;
   top:20px; left:0px;
   width:180px; height:360px;
@@ -113,17 +123,24 @@
   float:left;
   width:60px; height:60px;
 }
-#debug {
-  position:absolute;
-  top:400px; left:0px;
-  width:800px; height:360px;
+#instructions {
+  display:block;
+  position:fixed;
+  bottom:0px;
+  width:800px;
+  z-index:-10;
+  margin-right:auto;
+  margin-left:auto;
+  padding-bottom:24px;
+  padding-top:24px;
+  background-color:#FCF0AD;
   font-size:16px;
   color:#333;
   font-weight:bold;
+  text-align:center;
 }
-
-#debug pre {
-  width:800px;
+#instructions pre {
+  width:100%;
   overflow:hidden;
 }
 

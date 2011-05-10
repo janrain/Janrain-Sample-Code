@@ -1,21 +1,25 @@
-<html>
-<head>
+<!DOCTYPE HTML> 
+<html><head> 
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" > 
+  <meta name="author" content="Forest Basford, janrain" > 
+  <meta name="description" content="Janrain Demo Site" > 
+  <meta name="keywords" content="Janrain, Demo, Engage" >
   <title>Sample Site Demo</title>
   <link href="demo.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="demo.js"></script>
 </head>
-<body onload="signIn()">
+<body onload="goHome(); signIn(); hideById('load_mask');">
+  <div id="load_mask"></div>
   <div id="header">
     <div id="logo"></div><div id="slogan">Engage Demo</div>
   </div>
   <div id="main">
-    <div id="menu">[<div id="sign_in_out" class="item" onclick="signInOut()"></div>]<div id="user_profile" class="item" onclick="userProfile()"></div></div>
+    <div id="menu">[<div class="item" onclick="goHome()">Home</div>][<div id="sign_in_out" class="item" onclick="signInOut()"></div>]<div id="user_profile" class="item" onclick="userProfile()"></div></div>
     <div id="the_content"><div id="the_profile"></div></div>
     <div id="sign_in">
     <div id="sign_in_label">Sign in to import your identity.</div>
       <div id="sign_in_feedback" class="sign_in_box"></div>
-      <iframe id="the_buttons" class="sign_in_box" src="./custom-ui/"></iframe>
-      <iframe id="the_widget" class="sign_in_box" src="<!-- REPLACE WITH IFRAME SRC FROM DASHBOARD USING THE URL TO THIS DIRECTORY PLUS token/ as the token URL -->&flags=stay_in_window,hide_sign_in_with" scrolling="no"></iframe>
+      <iframe id="the_widget" class="sign_in_box" src="http:// YOUR ENGAGE APPLICATION DOMAIN /openid/embed?token_url=http%3A%2F%2F DOMAIN AND URL ENCODED PATH TO SAMPLE %2Ftoken%2F&flags=stay_in_window,hide_sign_in_with" scrolling="no"></iframe>
     </div>
     <div id="register">
       <form action="" id="reg_form" class="simple_form" onsubmit="return validateForm()">
@@ -40,12 +44,11 @@
         <label for="company">Company:</label>
         <input type="text" name="company" id="company" value="" class="form_text">
         <br>
-        <input type="hidden" name="identifier" id="identifier" class="form_text" value="" />
         <input type="submit" name="register" id="register_button" value="register" /><input type="reset" name="clear" id="clear_button" value="clear" />
       </form>
       <div id="reg_form_helper"></div>    
     </div>
-    <div id="debug"></div>
+    <div id="instructions"></div>
   </div>
 </body>
 </html>

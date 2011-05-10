@@ -6,18 +6,22 @@ SDK:
 Currently has auth_info and get_contacts implemented.
  library/engage.lib.php
 
+
 Example Token URL PHP:
 A small example token URL script that uses the library.
 This is setup to allow for a clean URL.
+
  token/index.php
   Uses:
     ../library/engage.lib.php
     ./engage-contacts.php
     ./engage-conf.php *
 
+
 Test Console:
 Just place the SDK folder in a php enabled location 
 then load the console folder location in your browser.
+
  console/index.php
  Uses:
   ../library/engage.lib.php
@@ -25,18 +29,32 @@ then load the console folder location in your browser.
   ./style.css
   ./console.conf.php *
 
+
 Sample site:
 This is a sample website that uses Engage to create an 
 easy registration that also stores the associated social ID.
 This sample site is built using AJAX style implementation with 
-data stored only in the PHP session.
+data stored in a PHP session and SQLite database.
+
  sample/index.html *
  Uses:
   ../library/engage.lib.php
-  ./demo.css  ./demo.js  ./get-profile.php  ./get-session.php  ./logo.png  ./nonce.php  ./register.php  ./session.php  ./sign-out.php  ./status.php
-  ./token/index.php //this is a slightly modified version of the token URL
+  ./demo.css
+  ./demo.js
+  ./get-profile.php
+  ./get-session.php
+  ./insert_update_user.php
+  ./logo.png
+  ./nonce.php
+  ./register.php
+  ./session.php
+  ./sign-out.php
+  ./status.php
+  ./token/index.php //this is a slightly modified version of the token URL script
   Uses:
-   ./token/engage-conf.php *   ./token/engage-contacts.php
+   ./token/engage-conf.php *
+   ./token/engage-contacts.php
+
 
 Requirements:
  PHP version >= 5
@@ -44,3 +62,4 @@ Requirements:
  	 cURL with SSL
  	 JSON
  	 simpleXML
+         Sample site full features require SQLite3

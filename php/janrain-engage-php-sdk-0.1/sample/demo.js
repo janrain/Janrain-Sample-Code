@@ -1,5 +1,5 @@
 function signInOut() {
-  if (userSignedIn === true) {
+  if (window.userSignedIn === true) {
     signOut();
   } else {
     hideById('sign_in_feedback');
@@ -9,12 +9,16 @@ function signInOut() {
     showById('register');
     showById('sign_in');
     showById('the_widget');
-    contentById('debug', '', false);
-    contentById('debug', 'Here we will use Engage to collect data to fill out the form on the right.<br>', true);
-    contentById('debug', 'Sign in with an Engage provider on the left.<br>', true);    
+    contentById('instructions', '', false);
+    contentById('instructions', 'Here we will use Engage to collect data to fill out the form on the right.<br>', true);
+    contentById('instructions', 'Sign in with an Engage provider on the left.<br>', true);    
   }
 }
 function authDone(doneFrame){
+  signIn();
+  if (window.userSignedIn === true) {
+    return false;
+  }
   if (doneFrame == true) {
     if (document.getElementById('the_widget').src != '') {
       window.the_widget_url = document.getElementById('the_widget').src;
@@ -27,8 +31,8 @@ function authDone(doneFrame){
     if (engageSession.readyState==4 && engageSession.status==200) {
       var sessionData = JSON.parse(engageSession.responseText);
       if (doneFrame == true) {
-        contentById('debug', '', false);        
-        contentById('debug', 'We recived a JSON string with the Engage data:<br><pre>'+engageSession.responseText+'</pre>', true);
+        contentById('instructions', '', false);        
+        contentById('instructions', 'We recived a JSON string with the Engage data:<br><pre>'+engageSession.responseText+'</pre>', true);
         contentById('sign_in_feedback', '');
         if (sessionData.profile.photo != null && sessionData.profile.photo != '') {
           contentById('sign_in_feedback', '<img class="avatar" src="'+sessionData.profile.photo+'" />', true);
@@ -56,13 +60,12 @@ function formHelper(sessionData) {
     form_help['last_name'] = '';
     form_help['email'] = '';
     form_help['profile_url'] = '';
-    form_help['identifier'] = '';
-    contentById('debug', 'Getting this data marks the end of our Engage authentication. What your site <br>', true);    
-    contentById('debug', 'does with the data is up to you.<br><br>', true);    
-    contentById('debug', 'For this demo we converted it into an object and matched it to some of the fields on the form.<br>', true);
-    contentById('debug', 'This data is then filled into the form to ease registration. Notice that we <br>', true);    
-    contentById('debug', 'provided clear feedback to the user telling them that the connection was made.<br><br>', true);    
-    contentById('debug', 'Go ahead and finish the form and click register.<br>', true);    
+    contentById('instructions', 'Getting this data marks the end of our Engage authentication. What your site <br>', true);    
+    contentById('instructions', 'does with the data is up to you.<br><br>', true);    
+    contentById('instructions', 'For this demo we converted it into an object and matched it to some of the fields on the form.<br>', true);
+    contentById('instructions', 'This data is then filled into the form to ease registration. Notice that we <br>', true);    
+    contentById('instructions', 'provided clear feedback to the user telling them that the connection was made.<br><br>', true);    
+    contentById('instructions', 'Go ahead and finish the form and click register.<br>', true);    
     signIn();
     if (typeof sessionData.profile == 'object') {
       if (isValidString(sessionData.profile.preferredUsername)) {
@@ -92,9 +95,6 @@ function formHelper(sessionData) {
       if (isValidString(sessionData.profile.url)) {
         form_help['profile_url'] = sessionData.profile.url;
       }
-      if (isValidString(sessionData.profile.identifier)) {
-        form_help['identifier'] = sessionData.profile.identifier;
-      }
     }
     for(var i=0;i<document.forms['reg_form'].elements.length;i++){
       if (form_help[document.forms['reg_form'].elements[i].id] != undefined && document.forms['reg_form'].elements[i].value == ''){
@@ -107,7 +107,7 @@ function validateForm() {
   var doPost = true;
   for(var i=0;i<document.forms['reg_form'].elements.length;i++){
     if (document.forms['reg_form'].elements[i].value == '' && document.forms['reg_form'].elements[i].className.search('required') >= 0){
-      contentById('debug', document.forms['reg_form'].elements[i].name + '<br>', true);
+      contentById('instructions', document.forms['reg_form'].elements[i].name + '<br>', true);
       contentById('reg_form_helper', 'Missing required field.');
       doPost = false;
     }
@@ -136,13 +136,13 @@ function postForm() {
         if (engageReg.readyState==4 && engageReg.status==200) {
           var regData = JSON.parse(engageReg.responseText);
           if (regData.stat == 'ok') {
-            contentById('debug', '');
+            contentById('instructions', '');
             contentById('the_content', '<div id="the_profile"></div>', false);
             contentById('the_content', 'Your user has been created and the site is now ready to offer the authenticated features and content.<br>', true);
             clearForm();
             hideById('register');                
-            userProfile();
             signIn();
+            userProfile();
           }
         }
       }
@@ -162,15 +162,18 @@ function userProfile() {
         contentById('sign_in_label', 'Please retry, starting over.');
         return false;
       }
-      hideById('debug');
+      hideById('instructions');
+      contentById('the_content', '<div id="the_profile"></div>', true);
       contentById('the_profile', '', false);
       contentById('the_profile', siteProfileData.user_data.user_name+', you are connected to '+siteProfileData.authinfo.profile.providerName+'.</p>', true);            
       if (siteProfileData.authinfo.profile.photo != null && siteProfileData.authinfo.profile.photo != '') {
         contentById('the_profile', '<img class="avatar" src="'+siteProfileData.authinfo.profile.photo+'" />', true);
       }
-      var userDataTable = CreateDetailView(siteProfileData.user_data,"lightPro",true);
-      userDataTable += CreateDetailView(siteProfileData.authinfo.profile,"lightPro",true);      
-      contentById('the_profile', userDataTable, true);
+      siteProfileData.user_data.map_data = siteProfileData.map_data;
+      var userDataTable1 = CreateDetailView(siteProfileData.user_data,"lightPro",true,'Data stored on this server (database):');
+      var userDataTable2 = CreateDetailView(siteProfileData.authinfo.profile,"lightPro",true,'Associated live data from Engage (session):');
+      contentById('the_profile', userDataTable1, true);
+      contentById('the_profile', userDataTable2, true);
       showById('the_content');        
       showById('the_profile');
     }
@@ -179,23 +182,25 @@ function userProfile() {
   siteProfile.send();
 }
 function signIn() {
-  userSignedIn = false;
-  document.getElementById("sign_in_out").innerHTML = 'Register';
+  if (  window.userSignedIn === true ) {
+    return false;
+  }
+  window.userSignedIn = false;
+  document.getElementById("sign_in_out").innerHTML = 'Sign In / Register';
   var checkSignin = new XMLHttpRequest();
   checkSignin.onreadystatechange=function() {
     if (checkSignin.readyState==4 && checkSignin.status==200) {
       var signInData = JSON.parse(checkSignin.responseText);
       if (signInData.stat == 'ok') {
-        contentById('user_profile', signInData.user_data.user_name);
-        hideById('debug');
+        contentById('user_profile', 'View profile: '+signInData.user_data.user_name );
+        hideById('instructions');
         hideById('register');
         hideById('sign_in');
         contentById('sign_in_out', 'Sign Out');
-        contentById('the_content', 'Welcome! ', true);
+        contentById('the_content', 'Welcome! ', false);
         showById('the_content');
-        userSignedIn = true;
-      } else {
-        contentById('debug', 'Click Register to start.<br>', true);
+        showById('user_profile');
+        window.userSignedIn = true;
       }
     }
   }
@@ -209,22 +214,38 @@ function signOut() {
     if (signOutRequest.readyState==4 && signOutRequest.status==200) {
       var signOutData = JSON.parse(signOutRequest.responseText);
       if (signOutData.stat == 'ok') {
-        contentById('debug', 'Signed Out<br>');
-        contentById('sign_in_out', 'Sign In or Register');
+        contentById('instructions', 'Signed Out<br>');
+        contentById('sign_in_out', 'Sign In / Register');
         hideById('the_content');
-        userSignedIn = false;
-        window.location = window.location;
+        window.userSignedIn = false;
+        goHome();
       } 
     }
   }
   signOutRequest.open('GET', 'sign-out.php', true);
   signOutRequest.send();
 }
+function goHome() {
+  hideById('the_profile');
+  hideById('sign_in');
+  hideById('register');
+  if (window.userSignedIn === true){
+    contentById('instructions', '');
+  } else {
+    hideById('the_content');
+    contentById('instructions', 'Click [Sign In / Register] at the top to begin.');
+    showById('instructions');
+  }
+}
 function showById(theId) {
-  document.getElementById(theId).style.display = 'block';
+  if ( document.getElementById(theId) != undefined ) {
+    document.getElementById(theId).style.display = '';
+  }
 }
 function hideById(theId) {
-  document.getElementById(theId).style.display = 'none';
+  if ( document.getElementById(theId) != undefined ) {
+    document.getElementById(theId).style.display = 'none';
+  }
 }
 function contentById(theId, theContent, append) {
   if (append === true) {
@@ -244,7 +265,7 @@ function isValidString(theString) {
   return false;
 }
 
-function CreateDetailView(objArray, theme, enableHeader) {
+function CreateDetailView(objArray, theme, enableHeader, caption) {
     // set optional theme parameter
     if (theme === undefined) {
         theme = 'mediumTable';  //default theme
@@ -254,9 +275,13 @@ function CreateDetailView(objArray, theme, enableHeader) {
         enableHeader = true; //default enable headers
     }
 
+    if (caption != undefined) {
+      caption = '<caption>' + caption + '</caption>';
+    }
+
     objArray = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
 
-    var str = '<table class="' + theme + '">';
+    var str = '<table class="' + theme + '">' + caption;
     str += '<tbody>';
 
     var row = 0;

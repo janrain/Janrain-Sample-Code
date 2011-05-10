@@ -8,7 +8,6 @@ $user_fields['email'] = '';
 $user_fields['profile_url'] = '';
 $user_fields['phone'] = '';
 $user_fields['company'] = '';
-$user_fields['identifier'] = '';
 session_name('engage');
 session_start();
 $incoming_nonce = strip_tags(urldecode($_GET['nonce']));
