@@ -1,3 +1,20 @@
+function setupInit() {
+  var setupGet = new XMLHttpRequest();
+  setupGet.onreadystatechange=function() {
+    if (setupGet.readyState==4 && setupGet.status==200) {
+      var setupData = JSON.parse(setupGet.responseText);
+      if (setupData.stat == 'ok') {
+        var iframeSrc = '[appDomain]/openid/embed?token_url=[baseUrl]token%2F&flags=stay_in_window,hide_sign_in_with';
+        var baseUrl = encodeURIComponent(window.location);
+        iframeSrc = iframeSrc.replace('[appDomain]', setupData.settings.application_domain);
+        iframeSrc = iframeSrc.replace('[baseUrl]', baseUrl);
+        document.getElementById('the_widget').src = iframeSrc;
+      }
+    }
+  }
+  setupGet.open('GET','setup.php',true);
+  setupGet.send();
+}
 function signInOut() {
   if (window.userSignedIn === true) {
     signOut();
@@ -103,6 +120,19 @@ function formHelper(sessionData) {
     }
   }
 }
+function validatePost() {
+  var doPost = true;
+  for(var i=0;i<document.forms['post_form'].elements.length;i++){
+    if (document.forms['post_form'].elements[i].value == '' && document.forms['post_form'].elements[i].className.search('required') >= 0){
+      contentById('instructions', document.forms['post_form'].elements[i].name + '<br>', true);
+      doPost = false;
+    }
+  }
+  if (doPost === true) {
+    postPost();
+  }
+  return false;
+}
 function validateForm() {
   var doPost = true;
   for(var i=0;i<document.forms['reg_form'].elements.length;i++){
@@ -139,7 +169,7 @@ function postForm() {
             contentById('instructions', '');
             contentById('the_content', '<div id="the_profile"></div>', false);
             contentById('the_content', 'Your user has been created and the site is now ready to offer the authenticated features and content.<br>', true);
-            clearForm();
+            clearForm('reg');
             hideById('register');                
             signIn();
             userProfile();
@@ -153,6 +183,39 @@ function postForm() {
   engageNonce.open('GET','nonce.php',true);
   engageNonce.send();
 }
+function postPost() {
+  var postNonce = new XMLHttpRequest();
+  postNonce.onreadystatechange=function() {
+    if (postNonce.readyState==4 && postNonce.status==200) {
+      var nonceData = JSON.parse(postNonce.responseText);
+      var paramArray = new Array();
+      for(var i=0;i<document.forms['post_form'].elements.length;i++){
+        if (document.forms['post_form'].elements[i].value != ''){
+          paramArray.push(document.forms['post_form'].elements[i].name +'='+ escape(document.forms['post_form'].elements[i].value));
+        }
+      }
+      paramArray.push('nonce='+nonceData.nonce);
+      var postParams = paramArray.join('&');
+      var demoPost = new XMLHttpRequest();
+      demoPost.onreadystatechange=function() {
+        if (demoPost.readyState==4 && demoPost.status==200) {
+          var postData = JSON.parse(demoPost.responseText);
+          if (postData.stat == 'ok') {
+            contentById('instructions', '');
+            contentById('the_content', '<div id="the_profile"></div>', false);
+            clearForm('post');
+            hideById('post');
+            signIn(true);
+          }
+        }
+      }
+      demoPost.open('GET','post.php?'+postParams,true);
+      demoPost.send();
+    }
+  }
+  postNonce.open('GET','nonce.php',true);
+  postNonce.send();
+}
 function userProfile() {
   var siteProfile = new XMLHttpRequest();
   siteProfile.onreadystatechange=function() {
@@ -163,7 +226,7 @@ function userProfile() {
         return false;
       }
       hideById('instructions');
-      contentById('the_content', '<div id="the_profile"></div>', true);
+      contentById('the_content', '<div id="the_profile"></div>');
       contentById('the_profile', '', false);
       contentById('the_profile', siteProfileData.user_data.user_name+', you are connected to '+siteProfileData.authinfo.profile.providerName+'.</p>', true);            
       if (siteProfileData.authinfo.profile.photo != null && siteProfileData.authinfo.profile.photo != '') {
@@ -181,10 +244,7 @@ function userProfile() {
   siteProfile.open('GET','get-profile.php',true);
   siteProfile.send();
 }
-function signIn() {
-  if (  window.userSignedIn === true ) {
-    return false;
-  }
+function signIn(home) {
   window.userSignedIn = false;
   document.getElementById("sign_in_out").innerHTML = 'Sign In / Register';
   var checkSignin = new XMLHttpRequest();
@@ -197,10 +257,14 @@ function signIn() {
         hideById('register');
         hideById('sign_in');
         contentById('sign_in_out', 'Sign Out');
-        contentById('the_content', 'Welcome! ', false);
+        contentById('the_content', 'Welcome, enter or update your comment.', false);
         showById('the_content');
         showById('user_profile');
+        showById('post');
         window.userSignedIn = true;
+        if (home) {
+          goHome();
+        }
       }
     }
   }
@@ -229,13 +293,92 @@ function goHome() {
   hideById('the_profile');
   hideById('sign_in');
   hideById('register');
+  hideById('post');
   if (window.userSignedIn === true){
     contentById('instructions', '');
+    var postsGet = new XMLHttpRequest();
+    postsGet.onreadystatechange=function() {
+      if (postsGet.readyState==4 && postsGet.status==200) {
+        var postsData = JSON.parse(postsGet.responseText);
+        if (postsData.stat == 'ok') {
+          var postsTable = createCommentsView(postsData.posts,"comments", 'Comments:');
+          contentById('the_content',postsTable);
+        }
+      }
+    }
+    postsGet.open('GET', 'posts.php', true);
+    postsGet.send();
   } else {
     hideById('the_content');
     contentById('instructions', 'Click [Sign In / Register] at the top to begin.');
     showById('instructions');
   }
+}
+function createCommentsView(objArray, theme, caption) {
+    if (caption != undefined) {
+      caption = '<div class="caption">' + caption + '</div>';
+    }
+    var str = '<div class="' + theme + '">' + caption;
+    var count = 0;
+    for (var comment in objArray) {
+      str += '<div><p><a href="'+objArray[comment].profile_url+'">'+objArray[comment].user_name+'</a>';
+      str += '<br>'+objArray[comment].comment+'</p></div>';
+      count++;
+    }
+    str += '</div>';
+    return str;
+}
+function CreateDetailView(objArray, theme, enableHeader, caption) {
+  // set optional theme parameter
+  if (theme === undefined) {
+    theme = 'mediumTable';//default theme
+  }
+  if (enableHeader === undefined) {
+    enableHeader = true; //default enable headers
+  }
+  if (caption != undefined) {
+    caption = '<caption>' + caption + '</caption>';
+  }
+  objArray = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+  var str = '<table class="' + theme + '">' + caption;
+  str += '<tbody>';
+  var row = 0;
+  for (var section in objArray) {
+    if (typeof objArray[section] == 'array' || typeof objArray[section] == 'object') {
+      for (var index in objArray[section]) {
+        if (typeof objArray[section][index] == 'array' || typeof objArray[section][index] == 'object') {
+          for (var value in objArray[section][index]) {
+            str += (row % 2 == 0) ? '<tr class="alt">' : '<tr>';
+            if (enableHeader) {
+              str += '<th scope="row">' + value + '</th>';
+            }
+            str += '<td>' + objArray[section][index][value] + '</td>';
+            str += '</tr>';
+            row++;
+          }
+        } else {
+          str += (row % 2 == 0) ? '<tr class="alt">' : '<tr>';
+          if (enableHeader) {
+            str += '<th scope="row">' + index + '</th>';
+          }
+          str += '<td>' + objArray[section][index] + '</td>';
+          str += '</tr>';
+          row++;
+        }
+      } 
+    } else {
+      str += (row % 2 == 0) ? '<tr class="alt">' : '<tr>';
+      if (enableHeader) {
+        str += '<th scope="row">' + section + '</th>';
+      }
+      str += '<td>' + objArray[section] + '</td>';
+      str += '</tr>';
+      row++;
+    }
+  }
+  str += '</tbody>'
+  str += '</table>';
+  return str;
 }
 function showById(theId) {
   if ( document.getElementById(theId) != undefined ) {
@@ -254,73 +397,12 @@ function contentById(theId, theContent, append) {
     document.getElementById(theId).innerHTML = theContent;
   }
 }
-function clearForm(){
-  document.getElementById('clear_button').click();
+function clearForm(formName){
+  document.getElementById(formName+'_clear_button').click();
 }
-
 function isValidString(theString) {
   if ( theString != undefined && theString != null && theString != '' && typeof theString == 'string' ) {
     return true;
   }
   return false;
 }
-
-function CreateDetailView(objArray, theme, enableHeader, caption) {
-    // set optional theme parameter
-    if (theme === undefined) {
-        theme = 'mediumTable';  //default theme
-    }
-
-    if (enableHeader === undefined) {
-        enableHeader = true; //default enable headers
-    }
-
-    if (caption != undefined) {
-      caption = '<caption>' + caption + '</caption>';
-    }
-
-    objArray = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-
-    var str = '<table class="' + theme + '">' + caption;
-    str += '<tbody>';
-
-    var row = 0;
-    for (var section in objArray) {
-      if (typeof objArray[section] == 'array' || typeof objArray[section] == 'object') {
-        for (var index in objArray[section]) {
-          if (typeof objArray[section][index] == 'array' || typeof objArray[section][index] == 'object') {          
-            for (var value in objArray[section][index]) {
-              str += (row % 2 == 0) ? '<tr class="alt">' : '<tr>';
-              if (enableHeader) {
-                str += '<th scope="row">' + value + '</th>';
-              }
-              str += '<td>' + objArray[section][index][value] + '</td>';
-              str += '</tr>';
-              row++;
-            }
-          } else {
-            str += (row % 2 == 0) ? '<tr class="alt">' : '<tr>';
-            if (enableHeader) {
-              str += '<th scope="row">' + index + '</th>';
-            }
-            str += '<td>' + objArray[section][index] + '</td>';
-            str += '</tr>';
-            row++;
-          }
-        } 
-      } else {
-        str += (row % 2 == 0) ? '<tr class="alt">' : '<tr>';
-        if (enableHeader) {
-          str += '<th scope="row">' + section + '</th>';
-        }
-        str += '<td>' + objArray[section] + '</td>';
-        str += '</tr>';
-        row++;
-      }
-    }
-    str += '</tbody>'
-    str += '</table>';
-    return str;
-}
-
-

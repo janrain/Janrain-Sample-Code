@@ -36,9 +36,10 @@ easy registration that also stores the associated social ID.
 This sample site is built using AJAX style implementation with 
 data stored in a PHP session and SQLite database.
 
- sample/index.html *
+ sample/index.html
  Uses:
   ../library/engage.lib.php
+  ./conf.php * //All the config settings are in here! 
   ./demo.css
   ./demo.js
   ./get-profile.php
@@ -46,14 +47,14 @@ data stored in a PHP session and SQLite database.
   ./insert_update_user.php
   ./logo.png
   ./nonce.php
+  ./post.php
+  ./posts.php
   ./register.php
   ./session.php
+  ./setup.php
   ./sign-out.php
   ./status.php
   ./token/index.php //this is a slightly modified version of the token URL script
-  Uses:
-   ./token/engage-conf.php *
-   ./token/engage-contacts.php
 
 
 Requirements:

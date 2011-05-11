@@ -8,7 +8,7 @@
   <link href="demo.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="demo.js"></script>
 </head>
-<body onload="goHome(); signIn(); hideById('load_mask');">
+<body onload="setupInit(); goHome(); signIn(); hideById('load_mask');">
   <div id="load_mask"></div>
   <div id="header">
     <div id="logo"></div><div id="slogan">Engage Demo</div>
@@ -19,7 +19,8 @@
     <div id="sign_in">
     <div id="sign_in_label">Sign in to import your identity.</div>
       <div id="sign_in_feedback" class="sign_in_box"></div>
-      <iframe id="the_widget" class="sign_in_box" src="http:// YOUR ENGAGE APPLICATION DOMAIN /openid/embed?token_url=http%3A%2F%2F DOMAIN AND URL ENCODED PATH TO SAMPLE %2Ftoken%2F&flags=stay_in_window,hide_sign_in_with" scrolling="no"></iframe>
+      <!-- <iframe id="the_buttons" class="sign_in_box" src="./custom-ui/" onload="hideById('the_buttons')"></iframe> -->
+      <iframe id="the_widget" class="sign_in_box" src="" scrolling="no"></iframe>
     </div>
     <div id="register">
       <form action="" id="reg_form" class="simple_form" onsubmit="return validateForm()">
@@ -44,11 +45,39 @@
         <label for="company">Company:</label>
         <input type="text" name="company" id="company" value="" class="form_text">
         <br>
-        <input type="submit" name="register" id="register_button" value="register" /><input type="reset" name="clear" id="clear_button" value="clear" />
+        <input type="submit" name="register" id="register_button" value="register" /><input type="reset" name="clear" id="reg_clear_button" class="clear" value="clear" />
       </form>
       <div id="reg_form_helper"></div>    
     </div>
     <div id="instructions"></div>
+    <div id="post">
+      <form action="" id="post_form" class="simple_form" onsubmit="return validatePost()">
+        <label for="comment">Comment: <span class="form_required" title="This field is required.">*</span></label>
+        <input type="text" name="comment" id="comment" value="" class="form_text required">
+        <br>
+        <input type="submit" name="post" id="post_button" value="post" /><input type="reset" name="clear" id="post_clear_button" class="clear" value="clear" />
+      </form>
+    </div>
   </div>
+<!-- Begin Janrain Demo Nav --> 
+<style type="text/css"> 
+#jr_nav_frame {
+  position:fixed;
+  left:-463px;
+  top:150px;
+  width:522px;
+  height:132px;
+  border:0;
+  overflow:hidden;
+  filter:alpha(opacity=60);
+  opacity:0.6;
+}
+#jr_nav_frame:hover {
+  cursor:pointer;
+}
+</style> 
+<script type="text/javascript" src="http://www.janraindemo.com/nav_menu.js" ></script> 
+<iframe id="jr_nav_frame" src="http://www.janraindemo.com/nav-menu/" ></iframe> 
+<!-- End Janrain Demo Nav -->
 </body>
 </html>

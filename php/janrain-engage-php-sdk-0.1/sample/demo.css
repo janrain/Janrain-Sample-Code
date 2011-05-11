@@ -115,7 +115,7 @@
   width:240px;
   margin-bottom:5px;
 }
-#clear_button {
+input.clear {
   float:right;
   width:80px;
 }
@@ -142,6 +142,24 @@
 #instructions pre {
   width:100%;
   overflow:hidden;
+}
+#post {
+  position:absolute;
+  width:400px;
+  right:0px;
+}
+
+.comments {
+  width:100%;
+}
+.comments div {
+  display:inline;
+  width:100%;
+  padding:3px;
+}
+.comments div p {
+  border:3px solid #888;
+  width:100%;
 }
 
 .lightPro { padding: 0; margin: 10px auto; border-collapse: collapse; border: 1px solid #333; font-family: "Trebuchet MS" , Verdana, Arial, Helvetica, sans-serif; font-size: 1em; color: #000; width: 100%; empty-cells: show; background-color: #fff; }

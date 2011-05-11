@@ -14,7 +14,7 @@
  */
 
 ob_start();
-require_once('../../engage.lib.php');
+require_once('engage.lib.php');
 $debug_array = array('Debug out:');
 
 /**
@@ -29,7 +29,7 @@ $debug_array = array('Debug out:');
  * Set the "Pro" status in this file.
  * The variable is $engage_pro
  */
-require_once('engage-conf.php');
+require_once('../conf.php');
 
 $token = $_POST['token'];
 $format = ENGAGE_FORMAT_JSON;
@@ -133,7 +133,7 @@ if (is_array($auth_info_array)) {
 <?php //echo $the_debug; ?>
     </pre>
     <script type="text/javascript">
-<?php if ($_GET['custom_ui'] == 'true') { ?>
+<?php if ($_GET['custom'] == 'true') { ?>
       window.opener.parent.authDone(false);
       window.opener.checkProviderCookie();
       self.close();

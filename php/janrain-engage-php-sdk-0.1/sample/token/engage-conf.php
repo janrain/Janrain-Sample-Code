@@ -5,14 +5,7 @@
  * All rights reserved.
  */
 /**
- * This is your apiKey from your Engage
- * dashboard on rpxnow.com
+ * This is not useed for this demo.
+ * See conf.php in sample directory.
  */
-$api_key = '';
-/**
- * Set $engage_pro to true if you have
- * a Pro or better subscription.
- * This enables get_contacts.
- */
-$engage_pro = false;
 ?>
