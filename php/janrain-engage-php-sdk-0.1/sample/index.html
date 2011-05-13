@@ -6,6 +6,7 @@
   <meta name="keywords" content="Janrain, Demo, Engage" >
   <title>Sample Site Demo</title>
   <link href="demo.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="jn-icons.css" media="screen" rel="stylesheet" type="text/css" />
   <script src="demo.js"></script>
 </head>
 <body onload="setupInit(); goHome(); signIn(); hideById('load_mask');">
@@ -14,7 +15,7 @@
     <div id="logo"></div><div id="slogan">Engage Demo</div>
   </div>
   <div id="main">
-    <div id="menu">[<div class="item" onclick="goHome()">Home</div>][<div id="sign_in_out" class="item" onclick="signInOut()"></div>]<div id="user_profile" class="item" onclick="userProfile()"></div></div>
+    <div id="menu"><div class="item" onclick="goHome()">Home</div> <div id="sign_in_out" class="item" onclick="signInOut()"></div> <div id="user_profile" class="item" onclick="userProfile()"></div></div>
     <div id="the_content"><div id="the_profile"></div></div>
     <div id="sign_in">
     <div id="sign_in_label">Sign in to import your identity.</div>
@@ -52,12 +53,18 @@
     <div id="instructions"></div>
     <div id="post">
       <form action="" id="post_form" class="simple_form" onsubmit="return validatePost()">
-        <label for="comment">Comment: <span class="form_required" title="This field is required.">*</span></label>
+        <label for="comment">Status: <span class="form_required" title="This field is required.">*</span></label>
         <input type="text" name="comment" id="comment" value="" class="form_text required">
         <br>
         <input type="submit" name="post" id="post_button" value="post" /><input type="reset" name="clear" id="post_clear_button" class="clear" value="clear" />
+        <br>Your status will be shown on the main page of the demo along with a link to your profile.
       </form>
     </div>
   </div>
+<script type="text/javascript"> 
+  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+  document.write(unescape("%3Cscript src='" + rpxJsHost +
+    "rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>
 </html>

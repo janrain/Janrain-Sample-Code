@@ -19,6 +19,6 @@ if ($incoming_nonce == $_SESSION['nonce'] && !empty($_SESSION['nonce'])) {
   $_SESSION['post_data'] = '';
 }
 ob_end_clean();
-echo json_encode(array('stat'=>$stat));
+echo json_encode(array('comment'=>$post_fields['comment'],'stat'=>$stat));
 exit;
 ?>

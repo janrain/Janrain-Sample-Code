@@ -5,9 +5,11 @@ function setupInit() {
       var setupData = JSON.parse(setupGet.responseText);
       if (setupData.stat == 'ok') {
         var iframeSrc = '[appDomain]/openid/embed?token_url=[baseUrl]token%2F&flags=stay_in_window,hide_sign_in_with';
-        var baseUrl = encodeURIComponent(window.location);
+        window.jnBaseUrl = ''+window.location;
+        var encBaseUrl = encodeURIComponent(window.location);
+        window.jnAppId = setupData.settings.app_id;
         iframeSrc = iframeSrc.replace('[appDomain]', setupData.settings.application_domain);
-        iframeSrc = iframeSrc.replace('[baseUrl]', baseUrl);
+        iframeSrc = iframeSrc.replace('[baseUrl]', encBaseUrl);
         document.getElementById('the_widget').src = iframeSrc;
       }
     }
@@ -20,6 +22,8 @@ function signInOut() {
     signOut();
   } else {
     hideById('sign_in_feedback');
+    contentById('the_content','');
+    hideById('the_content');
     if (window.the_widget_url != undefined) {
       document.getElementById('the_widget').src = window.the_widget_url;
     }
@@ -206,6 +210,7 @@ function postPost() {
             clearForm('post');
             hideById('post');
             signIn(true);
+            rpxSocial('Share:',postData.comment,window.jnBaseUrl,'Janrain Engage Sample Site Demo','');
           }
         }
       }
@@ -226,6 +231,7 @@ function userProfile() {
         return false;
       }
       hideById('instructions');
+      hideById('post');
       contentById('the_content', '<div id="the_profile"></div>');
       contentById('the_profile', '', false);
       contentById('the_profile', siteProfileData.user_data.user_name+', you are connected to '+siteProfileData.authinfo.profile.providerName+'.</p>', true);            
@@ -256,15 +262,16 @@ function signIn(home) {
         hideById('instructions');
         hideById('register');
         hideById('sign_in');
+        hideById('the_content');
         contentById('sign_in_out', 'Sign Out');
-        contentById('the_content', 'Welcome, enter or update your comment.', false);
-        showById('the_content');
+        contentById('the_content', 'Welcome, enter or update your status.', false);
         showById('user_profile');
         showById('post');
         window.userSignedIn = true;
-        if (home) {
+        if (home == true) {
           goHome();
         }
+        showById('the_content');
       }
     }
   }
@@ -296,33 +303,49 @@ function goHome() {
   hideById('post');
   if (window.userSignedIn === true){
     contentById('instructions', '');
-    var postsGet = new XMLHttpRequest();
-    postsGet.onreadystatechange=function() {
-      if (postsGet.readyState==4 && postsGet.status==200) {
-        var postsData = JSON.parse(postsGet.responseText);
-        if (postsData.stat == 'ok') {
-          var postsTable = createCommentsView(postsData.posts,"comments", 'Comments:');
-          contentById('the_content',postsTable);
-        }
-      }
-    }
-    postsGet.open('GET', 'posts.php', true);
-    postsGet.send();
   } else {
     hideById('the_content');
     contentById('instructions', 'Click [Sign In / Register] at the top to begin.');
     showById('instructions');
   }
+  showPosts();
+  window.postRefreshTimer = setInterval("refreshPosts()", 20000);
+}
+function refreshPosts() {
+  if ( document.getElementById('comments') != null ) {
+    showPosts();
+  } else {
+    clearInterval(window.postRefreshTimer);
+  }
+}
+function showPosts() {
+  var postsGet = new XMLHttpRequest();
+  postsGet.onreadystatechange=function() {
+    if (postsGet.readyState==4 && postsGet.status==200) {
+      var postsData = JSON.parse(postsGet.responseText);
+      if (postsData.stat == 'ok') {
+        var postsTable = createCommentsView(postsData.posts,"comments", 'Visitors:');
+        contentById('the_content',postsTable);
+        showById('the_content');
+      }
+    }
+  }
+  postsGet.open('GET', 'posts.php', true);
+  postsGet.send();
 }
 function createCommentsView(objArray, theme, caption) {
     if (caption != undefined) {
       caption = '<div class="caption">' + caption + '</div>';
     }
-    var str = '<div class="' + theme + '">' + caption;
+    var str = '<div id="' + theme + '">' + caption;
     var count = 0;
     for (var comment in objArray) {
-      str += '<div><p><a href="'+objArray[comment].profile_url+'">'+objArray[comment].user_name+'</a>';
-      str += '<br>'+objArray[comment].comment+'</p></div>';
+      var imgProvider = '';
+      if (objArray[comment].provider != '' && objArray[comment].provider != null){
+        imgProvider = '<div class="jn-icon jn-size30 jn-'+objArray[comment].provider+'"></div>';
+      }
+      str += '<div class="comment"><a class="profile_link" href="'+objArray[comment].profile_url+'" target="_blank">'+imgProvider+objArray[comment].user_name+'</a>';
+      str += '<p class="message">'+objArray[comment].comment+'</p></div>';
       count++;
     }
     str += '</div>';
@@ -379,6 +402,24 @@ function CreateDetailView(objArray, theme, enableHeader, caption) {
   str += '</tbody>'
   str += '</table>';
   return str;
+}
+function rpxSocial (rpxLabel, rpxSummary, rpxLink, rpxLinkText, rpxComment){
+  RPXNOW.init({appId: window.jnAppId, xdReceiver: window.jnBaseUrl+'rpx_xdcomm.html'});
+  RPXNOW.loadAndRun(['Social'], function () {
+    var activity = new RPXNOW.Social.Activity(
+     rpxLabel,
+     rpxLinkText,
+     rpxLink);
+    activity.setUserGeneratedContent(rpxComment);
+    activity.setDescription(rpxSummary);
+    if (document.getElementById('shareimage') != undefined) {
+      shareImageSrc = document.getElementById('shareimage').src;
+      shareImage = new RPXNOW.Social.ImageMediaCollection();
+      shareImage.addImage(shareImageSrc,rpxLink);
+      activity.setMediaItem(shareImage);
+    }
+    RPXNOW.Social.publishActivity(activity);
+  });
 }
 function showById(theId) {
   if ( document.getElementById(theId) != undefined ) {

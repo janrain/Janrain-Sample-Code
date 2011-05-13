@@ -20,10 +20,15 @@ if ( !empty($session['authinfo']['profile']['identifier']) && class_exists('SQLi
     }
   }
   $user['identifier'] = addslashes($session['authinfo']['profile']['identifier']);
-
+  $user['provider'] = addslashes($session['authinfo']['profile']['providerName']);
+  if ( !empty($session['authinfo']['profile']['photo']) ) {
+    $user['avatar_url'] = $session['authinfo']['profile']['photo'];
+  }
   $sqdb = new SQLite3('demo.sqlite');
-  $sqdb->exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, user_name STRING, first_name STRING, last_name STRING, email STRING, profile_url STRING, phone STRING, company STRING)');
-  $sqdb->exec('CREATE TABLE IF NOT EXISTS user_map (id INTEGER NOT NULL, identifier STRING)');
+  $sqdb->exec('CREATE TABLE IF NOT EXISTS users '
+  .'(id INTEGER PRIMARY KEY AUTOINCREMENT, user_name STRING, first_name STRING, last_name STRING, '
+  .'email STRING, profile_url STRING, avatar_url STRING, phone STRING, company STRING)');
+  $sqdb->exec('CREATE TABLE IF NOT EXISTS user_map (id INTEGER NOT NULL, identifier STRING, provider STRING)');
   $sqdb->exec('CREATE TABLE IF NOT EXISTS user_posts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL, comment STRING)');
 
   $identifier = $sqdb->querySingle('SELECT id FROM user_map WHERE identifier = \''.$user['identifier'].'\'');
@@ -36,7 +41,7 @@ if ( !empty($session['authinfo']['profile']['identifier']) && class_exists('SQLi
       $debug[] = $sqdb->lastErrorMsg();
     } else {
       $user['id'] = $sqdb->lastInsertRowID();
-      $query = 'INSERT INTO user_map (id, identifier) VALUES (\''.$user['id'].'\',\''.$user['identifier'].'\')';
+      $query = 'INSERT INTO user_map (id, identifier, provider) VALUES (\''.$user['id'].'\',\''.$user['identifier'].'\',\''.$user['provider'].'\')';
       $insert = $sqdb->exec($query);
       if (!$insert) {
         $stat = 'fail';
@@ -57,7 +62,7 @@ if ( !empty($session['authinfo']['profile']['identifier']) && class_exists('SQLi
     }
     $user_updates = array();
     foreach ($user as $key=>$val) {
-      if ( !empty($val) && $key != 'id' && $key != 'identifier' ) {
+      if ( !empty($val) && $key != 'id' && $key != 'identifier'  && $key != 'provider' ) {
         $user_updates[] = $key.' = \''.$val.'\'';
       }
     }

@@ -144,22 +144,80 @@ input.clear {
   overflow:hidden;
 }
 #post {
-  position:absolute;
-  width:400px;
-  right:0px;
-}
-
-.comments {
-  width:100%;
-}
-.comments div {
-  display:inline;
-  width:100%;
+  position:relative;
+  float:right;
+  z-index:10;
+  width:362px;
+  height:50px;
+  background-color:#DDD;
+  border:3px solid #DDD;
   padding:3px;
+  margin:3px;
+  border-top-left-radius:5px 5px;
+  -webkit-border-top-left-radius:5px 5px;
+  -o-border-top-left-radius:5px 5px;
+  -moz-border-radius-topleft:5px 5px;
+  border-top-right-radius:5px 5px;
+  -webkit-border-top-right-radius:5px 5px;
+  -o-border-top-right-radius:5px 5px;
+  -moz-border-radius-topright:5px 5px;
+  border-bottom-right-radius:5px 5px;
+  -webkit-border-bottom-right-radius:5px 5px;
+  -o-border-bottom-right-radius:5px 5px;
+  -moz-border-radius-bottomright:5px 5px;
+  border-bottom-left-radius:5px 5px;
+  -webkit-border-bottom-left-radius:5px 5px;
+  -o-border-bottom-left-radius:5px 5px;
+  -moz-border-radius-bottomleft:5px 5px;
 }
-.comments div p {
-  border:3px solid #888;
-  width:100%;
+#post form {
+  float:left;
+}
+#comments {
+  display:block;
+}
+#comments .comment {
+  float:left;
+  background-color:#DDD;
+  border:3px solid #DDD;
+  padding:3px;
+  margin:3px;
+  border-top-left-radius:5px 5px;
+  -webkit-border-top-left-radius:5px 5px;
+  -o-border-top-left-radius:5px 5px;
+  -moz-border-radius-topleft:5px 5px;
+  border-top-right-radius:5px 5px;
+  -webkit-border-top-right-radius:5px 5px;
+  -o-border-top-right-radius:5px 5px;
+  -moz-border-radius-topright:5px 5px;
+  border-bottom-right-radius:5px 5px;
+  -webkit-border-bottom-right-radius:5px 5px;
+  -o-border-bottom-right-radius:5px 5px;
+  -moz-border-radius-bottomright:5px 5px;
+  border-bottom-left-radius:5px 5px;
+  -webkit-border-bottom-left-radius:5px 5px;
+  -o-border-bottom-left-radius:5px 5px;
+  -moz-border-radius-bottomleft:5px 5px;
+}
+#comments .comment .profile_link {
+  position:relative;
+  height:41px;
+  top:30px;
+  left:-38px;
+  margin-right:-36px;
+  float:left;
+  font-size:10px;
+  text-decoration:none;
+  color:#009DDC;
+}
+#comments .comment .message {
+
+}
+div.jn-icon {
+  top:-30px;
+  left:38px;
+  margin-right:8px;
+  float:left;
 }
 
 .lightPro { padding: 0; margin: 10px auto; border-collapse: collapse; border: 1px solid #333; font-family: "Trebuchet MS" , Verdana, Arial, Helvetica, sans-serif; font-size: 1em; color: #000; width: 100%; empty-cells: show; background-color: #fff; }

@@ -1,0 +1,65 @@
+.jn-icon {
+  display:block;
+  position:relative;
+  background-repeat:no-repeat;
+  border:0;
+  margin:0;
+}
+
+.jn-size30 {
+  width:30px;
+  height:30px;
+  background-image:url('jn-icons32.png');
+}
+
+.jn-size16 {
+  width:16px;
+  height:16px;
+  background-image:url('jn-icons16.png');
+}
+
+.jn-size16.jn-facebook    { background-position:0px 0px; }
+.jn-size16.jn-google      { background-position:0px -16px; }
+.jn-size16.jn-linkedin    { background-position:0px -32px; }
+.jn-size16.jn-myspace     { background-position:0px -48px; }
+.jn-size16.jn-twitter     { background-position:0px -64px; }
+.jn-size16.jn-live_id     { background-position:0px -80px; }
+.jn-size16.jn-yahoo       { background-position:0px -96px; }
+.jn-size16.jn-aol         { background-position:0px -112px; }
+.jn-size16.jn-blogger     { background-position:0px -128px; }
+.jn-size16.jn-flickr      { background-position:0px -144px; }
+.jn-size16.jn-hyves       { background-position:0px -160px; }
+.jn-size16.jn-livejournal { background-position:0px -176px; }
+.jn-size16.jn-myopenid    { background-position:0px -192px; }
+.jn-size16.jn-netlog      { background-position:0px -208px; }
+.jn-size16.jn-openid      { background-position:0px -224px; }
+.jn-size16.jn-verisign    { background-position:0px -240px; }
+.jn-size16.jn-wordpress   { background-position:0px -256px; }
+.jn-size16.jn-paypal      { background-position:0px -272px; }
+.jn-size16.jn-orkut       { background-position:0px -288px; }
+.jn-size16.jn-vzn         { background-position:0px -304px; }
+.jn-size16.jn-salesforce  { background-position:0px -320px; }
+.jn-size16.jn-foursquare  { background-position:0px -336px; }
+
+.jn-size30.jn-facebook    { background-position:0px 0px; }
+.jn-size30.jn-google      { background-position:0px -30px; }
+.jn-size30.jn-linkedin    { background-position:0px -60px; }
+.jn-size30.jn-myspace     { background-position:0px -90px; }
+.jn-size30.jn-twitter     { background-position:0px -120px; }
+.jn-size30.jn-live_id     { background-position:0px -150px; }
+.jn-size30.jn-yahoo       { background-position:0px -180px; }
+.jn-size30.jn-aol         { background-position:0px -210px; }
+.jn-size30.jn-blogger     { background-position:0px -240px; }
+.jn-size30.jn-flickr      { background-position:0px -270px; }
+.jn-size30.jn-hyves       { background-position:0px -300px; }
+.jn-size30.jn-livejournal { background-position:0px -330px; }
+.jn-size30.jn-myopenid    { background-position:0px -360px; }
+.jn-size30.jn-netlog      { background-position:0px -390px; }
+.jn-size30.jn-openid      { background-position:0px -420px; }
+.jn-size30.jn-verisign    { background-position:0px -450px; }
+.jn-size30.jn-wordpress   { background-position:0px -480px; }
+.jn-size30.jn-paypal      { background-position:0px -510px; }
+.jn-size30.jn-orkut       { background-position:0px -540px; }
+.jn-size30.jn-vzn         { background-position:0px -570px; }
+.jn-size30.jn-salesforce  { background-position:0px -600px; }
+.jn-size30.jn-foursquare  { background-position:0px -630px; }
