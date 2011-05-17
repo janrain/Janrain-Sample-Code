@@ -201,25 +201,18 @@ input.clear {
 }
 #comments .comment .profile_link {
   position:relative;
+  width:33px;
   height:41px;
-  top:30px;
-  left:-38px;
-  margin-right:-36px;
   float:left;
   font-size:10px;
   text-decoration:none;
   color:#009DDC;
 }
 #comments .comment .message {
-
 }
 div.jn-icon {
-  top:-30px;
-  left:38px;
-  margin-right:8px;
   float:left;
 }
-
 .lightPro { padding: 0; margin: 10px auto; border-collapse: collapse; border: 1px solid #333; font-family: "Trebuchet MS" , Verdana, Arial, Helvetica, sans-serif; font-size: 1em; color: #000; width: 100%; empty-cells: show; background-color: #fff; }
 .lightPro caption { caption-side: top; font-size: 0.9em; font-style: italic; text-align: right; padding: 0.5em 0; }
 .lightPro th, .lightPro td { border: 1px dotted #666; padding: 0.1em 0.3em; text-align: left; color: #055f81; }
