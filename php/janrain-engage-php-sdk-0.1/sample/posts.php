@@ -43,7 +43,9 @@ if ( class_exists('SQLite3') ) {
         if ( !empty($row['provider']) ) {
           $row['provider'] = $provider_map[$row['provider']];
         }
-        $posts[] = $row;
+        if ( !empty($row['comment']) && preg_replace('/\s+/', '', $row['comment']) != '' ) {
+          $posts[] = $row;
+        }
       }
     }
   }
