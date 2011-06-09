@@ -11,10 +11,12 @@ if (file_exists('console.conf.php')) {
 } else {
 	$the_error .= 'console.conf.php not found';
 }
-if (file_exists('../engage.lib.php')) {
-	require_once('../libary/engage.lib.php');
-}else{
-	$the_error .= '../library/engage.lib.php not found';
+if (file_exists('../library/engage.lib.php')) {
+	require_once('../library/engage.lib.php');
+} elseif (file_exists('engage.lib.php')) {
+	require_once('engage.lib.php');
+} else {
+	$the_error .= 'engage.lib.php not found';
 }
 if (file_exists('index.inc.php')) {
 	require_once('index.inc.php');

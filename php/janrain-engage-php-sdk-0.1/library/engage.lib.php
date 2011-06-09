@@ -265,8 +265,8 @@ function engage_get_errors($label=NULL) {
 			}
 		}
 	}
-	if (!empty($engage_errors)){
-		return $engage_errors;
+	if (!empty($return_errors)){
+		return $return_errors;
 	}
 	return false;
 }
