@@ -6,6 +6,11 @@ SDK:
 Currently has auth_info and get_contacts implemented.
  library/engage.lib.php
 
+Experimental:
+Activity API basic posting.
+ library/engage.activity.lib.php
+  Note:
+   Include after engage.lib.php
 
 Example Token URL PHP:
 A small example token URL script that uses the library.
