@@ -242,6 +242,7 @@ if (isset($the_errors)) {
 }
 
 if (!empty($the_error)) {
+	$the_error = str_replace(ENGAGE_CONSOLE_API_KEY, $fourty_stars, $the_error);
 	$style .= '		#the_errors {
 			display:block;
 		}
