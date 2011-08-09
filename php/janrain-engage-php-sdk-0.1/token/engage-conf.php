@@ -8,11 +8,23 @@
  * This is your apiKey from your Engage
  * dashboard on rpxnow.com
  */
-$api_key = 'YOUR API KEY';
+$api_key = 'api key here';
 /**
  * Set $engage_pro to true if you have
  * a Pro or better subscription.
- * This enables get_contacts.
  */
 $engage_pro = false;
+
+/**
+ * Enable get_contacts after auth_info.
+ * This should not be done inline with auth_info in production.
+ */
+$do_get_contacts = false;
+
+/**
+ * Enable activity post after auth_info.
+ * This should not be done inline with auth_info in production.
+ * Requires experimental activity library.
+ */
+$do_activity = false;
 ?>

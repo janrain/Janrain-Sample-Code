@@ -15,6 +15,7 @@
 
 ob_start();
 require_once('../library/engage.lib.php');
+//require_once('../library/engage.activity.lib.php');
 $debug_array = array('Debug out:');
 
 /**
@@ -54,7 +55,7 @@ if ($result === false) {
 
 /* Can we use get_contacts? */
 $go_contacts = false;
-if ($engage_pro === true) {
+if ($engage_pro === true && $do_get_contacts === true) {
 	if (is_array($auth_info_array)) {
 		if (engage_get_contacts_provider($auth_info_array['profile']['providerName'])) {
 			$go_contacts = true;
@@ -62,15 +63,30 @@ if ($engage_pro === true) {
 	}
 }
 
+/* Can we perform an activity post? */
+$go_activity = false;
+if ($engage_pro === true && $do_activity === true) {
+  if (is_array($auth_info_array)) {
+    if (isset($auth_info_array['profile']['providerName']) && isset($auth_info_array['profile']['identifier'])) {
+      $activity_base = engage_activity_base('http://www.janrain.com/', 'Share');
+      $activity_item = engage_activity_item($activity_base);
+      $activity_result = engage_activity($api_key, $auth_info_array['profile']['identifier'], $activity_item);
+      if ($activity_result !== false) {
+        $go_activity = true;
+      }
+    }
+  }
+}
+
 /*
  * Uncomment lines below to get SDK level
  * debug data. Caution: This could result in 
  * revealing the api_key.
  */
-//$debugs = engage_get_errors(ENGAGE_ELABEL_DEBUG);
-//foreach ($debugs as $debug=>$label) {
-//	$debug_array[] = 'Debug: '.$debug;
-//}
+$debugs = engage_get_errors(ENGAGE_ELABEL_DEBUG);
+foreach ($debugs as $debug=>$label) {
+	$debug_array[] = 'Debug: '.$debug;
+}
 
 $the_buffer = ob_get_contents();
 if (!empty($the_buffer)) {
@@ -98,7 +114,10 @@ if ($go_contacts === true) {
 		echo urlencode($auth_info_array['profile']['identifier']); 
 		?>" style="width:100%;height:240px"></iframe>
 <?php 
-} 
+}
+if ($go_activity == true) {
+  echo '<p> Activity posted to '.$auth_info_array['profile']['providerName'].'</p>';
+}
 ?>
 		<pre>
 <?php echo $the_debug; ?>

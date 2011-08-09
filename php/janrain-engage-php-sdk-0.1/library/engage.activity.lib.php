@@ -78,14 +78,14 @@ function engage_activity($api_key, $identifier, $activity, $truncate = ENGAGE_AC
 /* end engage_activity */
 
 /* begin engage_activity_item */
-function engage_activity_item($basic, $media=NULL, $action_links=NULL, $properties=NULL) {
+function engage_activity_item($base, $media=NULL, $action_links=NULL, $properties=NULL) {
   $ready = true;
-  if (!is_array($basic)) {
+  if (!is_array($base)) {
     engage_error(ENGAGE_ARRAY_ERROR, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
-    $activity = $basic;
+    $activity = $base;
     $activity[ENGAGE_ACT_KEY_MEDIA] = $media;
     $activity[ENGAGE_ACT_KEY_ACTIONLINKS] = $action_links;
     $activity[ENGAGE_ACT_KEY_PROPERTIES] = $properties;
@@ -95,32 +95,32 @@ function engage_activity_item($basic, $media=NULL, $action_links=NULL, $properti
 }
 /* end engage_activity_item */
 
-/* begin engage_activity_basic */
-function engage_activity_basic($url, $action, $user_content=NULL, $title=NULL, $description=NULL) {
+/* begin engage_activity_base */
+function engage_activity_base($url, $action, $user_content=NULL, $title=NULL, $description=NULL) {
   $ready = true;
   if (!is_string($url) & !is_string($action)) {
     engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
-    $basic = array (
+    $base = array (
       ENGAGE_ACT_KEY_URL    => $url,
       ENGAGE_ACT_KEY_ACTION => $action,
     );
     if ($user_content !== NULL) {
-      $basic[ENGAGE_ACT_KEY_USERCONTENT] = $user_content;
+      $base[ENGAGE_ACT_KEY_USERCONTENT] = $user_content;
     }
     if ($title !== NULL) {
-      $basic[ENGAGE_ACT_KEY_TITLE] = $title;
+      $base[ENGAGE_ACT_KEY_TITLE] = $title;
     }
     if ($description !== NULL) {
-      $basic[ENGAGE_ACT_KEY_DESCRIPTION] = $description;
+      $base[ENGAGE_ACT_KEY_DESCRIPTION] = $description;
     }
-    return $basic;
+    return $base;
   }
   return false;
 }
-/* end enage_activity_basic */
+/* end enage_activity_base */
 
 /* begin engage_activity_media */
 function engage_activity_media() {
@@ -169,4 +169,17 @@ function engage_activity_properties() {
   );
 }
 /* end engage_activity_properties */
+
+/* begin engage_activity_provider */
+/**
+ * Test if provider is valid for activity
+ */
+function engage_activity_provider($provider) {
+  $provider_array = explode(',', ENGAGE_ACTIVITY_PROVIDERS);
+  if (in_array($provider, $provider_array)) {
+    return true;
+  }
+  return false;
+}
+/* end engage_activity_provider */
 ?>
