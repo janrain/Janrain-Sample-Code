@@ -262,7 +262,7 @@ function engage_activity_action_link($action_url, $action_text) {
     $action_link = array(
       array(
         ENGAGE_ACT_KEY_TITLE => $action_text,
-        'href' => 'https://support.janrain.com/'
+        ENGAGE_ACT_KEY_HREF => $action_url
       )
     );
     return $action_link;
