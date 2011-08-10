@@ -2,6 +2,13 @@
 
 //init
 engage_define('ENGAGE_ACTIVITY_EP', 'activity');
+engage_define('ENGAGE_ACT_MAX_IMAGE_COUNT', 5);
+engage_define('ENGAGE_ACT_MAX_FLASH_COUNT', 1);
+engage_define('ENGAGE_ACT_MAX_MP3_COUNT', 1);
+engage_define('ENGAGE_ACT_MIN_FLASH_WIDTH', 30);
+engage_define('ENGAGE_ACT_MAX_FLASH_WIDTH', 90);
+engage_define('ENGAGE_ACT_MIN_FLASH_EWIDTH', 1);
+engage_define('ENGAGE_ACT_MAX_FLASH_EWIDTH', 398);
 
 engage_define('ENGAGE_ACTVITYTRUNCATE', 'true');
 engage_define('ENGAGE_URLSHORTENING', 'true');
@@ -10,20 +17,32 @@ engage_define('ENGAGE_ACTIVITY_PROVIDERS', 'LinkedIn,Twitter,Facebook,Yahoo!,MyS
 
 engage_define('ENGAGE_KEY_ACTIVITY', 'activity');
 engage_define('ENGAGE_KEY_TRUNCATE', 'truncate');
-engage_define('ENGAGE_KEY_URL_SHORTENING', 'url_shortening');
 engage_define('ENGAGE_KEY_LOCATION', 'location');
+engage_define('ENGAGE_KEY_URLSHORTENING', 'url_shortening');
 
 engage_define('ENGAGE_ACT_KEY_MEDIA', 'media');
-engage_define('ENGAGE_ACT_KEY_ACTIONLINKS', 'action_links');
-engage_define('ENGAGE_ACT_KEY_PROPERTIES', 'properties');
 engage_define('ENGAGE_ACT_KEY_URL', 'url');
-engage_define('ENGAGE_ACT_KEY_ACTION', 'action');
-engage_define('ENGAGE_ACT_KEY_USERCONTENT', 'user_generated_content');
+engage_define('ENGAGE_ACT_KEY_SRC', 'src');
+engage_define('ENGAGE_ACT_KEY_HREF', 'href');
+engage_define('ENGAGE_ACT_KEY_TYPE', 'type');
 engage_define('ENGAGE_ACT_KEY_TITLE', 'title');
+engage_define('ENGAGE_ACT_KEY_ALBUM', 'album');
+engage_define('ENGAGE_ACT_KEY_WIDTH', 'width');
+engage_define('ENGAGE_ACT_KEY_HEIGHT', 'height');
+engage_define('ENGAGE_ACT_KEY_EWIDTH', 'expanded_width');
+engage_define('ENGAGE_ACT_KEY_EHEIGHT', 'expanded_height');
+engage_define('ENGAGE_ACT_KEY_SWFSRC', 'swfsrc');
+engage_define('ENGAGE_ACT_KEY_IMGSRC', 'imgsrc');
+engage_define('ENGAGE_ACT_KEY_ACTION', 'action');
+engage_define('ENGAGE_ACT_KEY_ARTIST', 'artist');
+engage_define('ENGAGE_ACT_KEY_PROPERTIES', 'properties');
+engage_define('ENGAGE_ACT_KEY_USERCONTENT', 'user_generated_content');
+engage_define('ENGAGE_ACT_KEY_ACTIONLINKS', 'action_links');
 engage_define('ENGAGE_ACT_KEY_DESCRIPTION', 'description');
 
-engage_define('ENGAGE_ARRAY_ERROR', 'array expected');
-engage_define('ENGAGE_STRING_ERROR', 'string expected');
+engage_define('ENGAGE_ACT_TYPE_IMAGE', 'image');
+engage_define('ENGAGE_ACT_TYPE_FLASH', 'flash');
+engage_define('ENGAGE_ACT_TYPE_MP3', 'mp3');
 
 /* begin engage_activity */
 /**
@@ -98,7 +117,7 @@ function engage_activity_item($base, $media=NULL, $action_links=NULL, $propertie
 /* begin engage_activity_base */
 function engage_activity_base($url, $action, $user_content=NULL, $title=NULL, $description=NULL) {
   $ready = true;
-  if (!is_string($url) & !is_string($action)) {
+  if (!is_string($url) || !is_string($action)) {
     engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
     $ready = false;
   }
@@ -122,51 +141,147 @@ function engage_activity_base($url, $action, $user_content=NULL, $title=NULL, $d
 }
 /* end enage_activity_base */
 
-/* begin engage_activity_media */
-function engage_activity_media() {
-      $media = array(
-        array( 'type' => 'image', 
-               'src' => 'http://docj27ko03fnu.cloudfront.net/rel/img/861d564d23ba416d9b480deac7c9f1f6.png', 
-               'href' => 'http://plugins.janrain.com/wordpress/'
-        )
-      );
-
-      $media = array(
-        array( 'type' => 'flash', 
-               'swfsrc' => 'http://www.adobe.com/swf/software/flash/about/flash_animation.swf', 
-               'imgsrc' => 'http://wwwimages.adobe.com/www.adobe.com/ubi/template/identity/adobe/screen/SiteHeader/logo.png',
-               'width' => '90',/*width and height must be between 30 and 90 inclusive*/
-               'height' => '90',
-               'expanded_width' => '398',/*expanded width and height must be 398 or less*/
-               'expanded_height' => '98'
-        )
-      );
-
-      $media = array(                            /*multi-dimensional array or object*/
-        array( 'type' => 'mp3',/*this is sometimes documented as "music", use "mp3"*/ 
-               'src' => 'http://ontherecordpodcast.com/pr/otro/electronic/Get_Facebook_Friends_and_Twitter_Followers_While_You_Sleep.mp3', 
-               'title' => 'Get Facebook Friends and Twitter Followers While You Sleep',
-               'artist' => 'Tore Steen',
-               'album' => 'On The Record Online'
-        )
-      );
+/* begin engage_activity_media_image */
+function engage_activity_media_image($src_url, $href_url, $media_image=NULL) {
+  $ready = true;
+  if (!is_string($src_url) || !is_string($href_url)) {
+    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if ($ready === true){
+    $image_array = array();
+    if (is_array($media_image)) {
+      if (count($media_image) < ENGAGE_ACT_MAX_IMAGE_COUNT) {
+        $image_array = $media_image;
+      } else {
+        engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
+        return $media_image;
+      }
+    }
+    $image_array[] = array(
+      ENGAGE_ACT_KEY_TYPE => ENGAGE_ACT_TYPE_IMAGE,
+      ENGAGE_ACT_KEY_SRC  => ENGAGE_ACT_TYPE_IMAGE,
+      ENGAGE_ACT_KEY_HREF => ENGAGE_ACT_TYPE_IMAGE
+    );
+    return $image_array;
+  }
+  return false;
 }
-/* end engage_activity_media */
+/* end engage_activity_media_image */
 
-/* begin engage_activity_action_links */
-function engage_activity_action_links() {
-      $action_links = array(
-        array( 'text' => 'action link text.', 'href' => 'https://support.janrain.com/' )
-      );
+/* begin engage_activity_media_flash */
+function engage_activity_media_flash($swf_url, $thumb_url, $width, $height, $ewidth, $eheight, $media_flash=NULL) {
+  $ready = true;
+  if (!is_string($swf_url) || !is_string($thumb_url)) {
+    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if (!is_int($width) || !is_int($height) || !is_int($ewidth) || !is_int($eheight)) {
+    enagage_error(ENGAGE_INT_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if (ENGAGE_ACT_MIN_FLASH_WIDTH <= $width && $width <= ENGAGE_ACT_MAX_FLASH_WIDTH) {
+    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if (ENGAGE_ACT_MIN_FLASH_HEIGHT <= $height && $height <= ENGAGE_ACT_MAX_FLASH_HEIGHT) {
+    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if (ENGAGE_ACT_MIN_FLASH_EWIDTH <= $ewidth && $ewidth <= ENGAGE_ACT_MAX_FLASH_EWIDTH) {
+    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if (ENGAGE_ACT_MIN_FLASH_EHEIGHT <= $eheight && $eheight <= ENGAGE_ACT_MAX_FLASH_EHEIGHT) {
+    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if ($ready === true){
+    $flash_array = array();
+    if (is_array($media_flash)) {
+      if (count($media_flash) < ENGAGE_ACT_MAX_FLASH_COUNT) {
+        $flash_array = $media_flash;
+      } else {
+        engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
+        return $media_flash;
+      }
+    }
+    $flash_array[] = array(
+      ENGAGE_ACT_KEY_TYPE => ENGAGE_ACT_TYPE_FLASH,
+      ENGAGE_ACT_KEY_SWFSRC  => $swf_url,
+      ENGAGE_ACT_KEY_IMGSRC => $thumb_url,
+      ENGAGE_ACT_KEY_WIDTH => $width,
+      ENGAGE_ACT_KEY_HEIGHT => $height,
+      ENGAGE_ACT_KEY_EWIDTH => $ewidth,
+      ENGAGE_ACT_KEY_EHEIGHT => $eheight
+    );
+    return $flash_array;
+  }
+  return false;
 }
-/* end engage_activity_action_links */
+/* end engage_activity_media_flash */
+
+/* begin engage_activity_media_mp3 */
+function engage_activity_media_mp3($mp3_url, $title, $artist, $album, $media_mp3=NULL) {
+  $ready = true;
+  if (!is_string($mp3_url) || !is_string($title) || !is_string($artist) || !is_string($album)) {
+    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if ($ready === true){
+    $mp3_array = array();
+    if (is_array($media_mp3)) {
+      if (count($media_mp3) < ENGAGE_ACT_MAX_MP3_COUNT) {
+        $mp3_array = $media_mp3;
+      } else {
+        engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
+        return $media_mp3;
+      }
+    }
+    $mp3_array[] = array(
+      ENGAGE_ACT_KEY_TYPE => ENGAGE_ACT_TYPE_MP3,
+      ENGAGE_ACT_KEY_SRC  => $mp3_url,
+      ENGAGE_ACT_KEY_TITLE => $title,
+      ENGAGE_ACT_KEY_ARTIST => $artist,
+      ENGAGE_ACT_KEY_ALBUM => $album
+    );
+    return $mp3_array;
+  }
+  return false;
+}
+/* end engage_activity_media_mp3 */
+
+/* begin engage_activity_action_link */
+function engage_activity_action_link($action_url, $action_text) {
+  $ready = true;
+  if (!is_string($action_url) || !is_string($action_text)) {
+    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if ($ready === true) {
+    $action_link = array(
+      array(
+        ENGAGE_ACT_KEY_TITLE => $action_text,
+        'href' => 'https://support.janrain.com/'
+      )
+    );
+    return $action_link;
+  }
+  return false;
+}
+/* end engage_activity_action_link */
 
 /* begin engage_activity_properties */
-function engage_activity_properties() {
-  $properties = array(                            /*multi-dimensional array or object*/
-        'Potatoes' => 'mashed',
-        'Apples'   => array( 'text' => 'property link', 'href' => 'http://www.apple.com/' )
-  );
+function engage_activity_properties($properties_array) {
+  $ready = true;
+  if (!is_array($properties_array) || empty($properties_array)) {
+    engage_error(ENGAGE_ARRAY_ERROR, __FUNCTION__);
+    $ready = false;
+  }
+  if ($ready === true) {
+    return $properties_array;
+  }
+  return false;
 }
 /* end engage_activity_properties */
 
