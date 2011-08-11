@@ -160,8 +160,8 @@ function engage_activity_media_image($src_url, $href_url, $media_image=NULL) {
     }
     $image_array[] = array(
       ENGAGE_ACT_KEY_TYPE => ENGAGE_ACT_TYPE_IMAGE,
-      ENGAGE_ACT_KEY_SRC  => ENGAGE_ACT_TYPE_IMAGE,
-      ENGAGE_ACT_KEY_HREF => ENGAGE_ACT_TYPE_IMAGE
+      ENGAGE_ACT_KEY_SRC  => $src_url,
+      ENGAGE_ACT_KEY_HREF => $href_url
     );
     return $image_array;
   }
