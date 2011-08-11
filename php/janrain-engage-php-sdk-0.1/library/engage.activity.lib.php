@@ -2,13 +2,17 @@
 
 //init
 engage_define('ENGAGE_ACTIVITY_EP', 'activity');
-engage_define('ENGAGE_ACT_MAX_IMAGE_COUNT', 5);
-engage_define('ENGAGE_ACT_MAX_FLASH_COUNT', 1);
-engage_define('ENGAGE_ACT_MAX_MP3_COUNT', 1);
-engage_define('ENGAGE_ACT_MIN_FLASH_WIDTH', 30);
-engage_define('ENGAGE_ACT_MAX_FLASH_WIDTH', 90);
-engage_define('ENGAGE_ACT_MIN_FLASH_EWIDTH', 1);
-engage_define('ENGAGE_ACT_MAX_FLASH_EWIDTH', 398);
+engage_define('ENGAGE_ACT_IMAGE_MAX_COUNT', 5);
+engage_define('ENGAGE_ACT_MP3_MAX_COUNT', 1);
+engage_define('ENGAGE_ACT_FLASH_MAX_COUNT', 1);
+engage_define('ENGAGE_ACT_FLASH_MIN_WIDTH', 30);
+engage_define('ENGAGE_ACT_FLASH_MAX_WIDTH', 90);
+engage_define('ENGAGE_ACT_FLASH_MIN_HEIGHT', 30);
+engage_define('ENGAGE_ACT_FLASH_MAX_HEIGHT', 90);
+engage_define('ENGAGE_ACT_FLASH_MIN_EWIDTH', 30);
+engage_define('ENGAGE_ACT_FLASH_MAX_EWIDTH', 398);
+engage_define('ENGAGE_ACT_FLASH_MIN_EHEIGHT', 30);
+engage_define('ENGAGE_ACT_FLASH_MAX_EHEIGHT', 398);
 
 engage_define('ENGAGE_ACTVITYTRUNCATE', 'true');
 engage_define('ENGAGE_URLSHORTENING', 'true');
@@ -151,7 +155,7 @@ function engage_activity_media_image($src_url, $href_url, $media_image=NULL) {
   if ($ready === true){
     $image_array = array();
     if (is_array($media_image)) {
-      if (count($media_image) < ENGAGE_ACT_MAX_IMAGE_COUNT) {
+      if (count($media_image) < ENGAGE_ACT_IMAGE_MAX_COUNT) {
         $image_array = $media_image;
       } else {
         engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
@@ -180,26 +184,26 @@ function engage_activity_media_flash($swf_url, $thumb_url, $width, $height, $ewi
     enagage_error(ENGAGE_INT_ERROR, __FUNCTION__);
     $ready = false;
   }
-  if (ENGAGE_ACT_MIN_FLASH_WIDTH <= $width && $width <= ENGAGE_ACT_MAX_FLASH_WIDTH) {
-    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+  if (ENGAGE_ACT_FLASH_MIN_WIDTH >= $width && $width <= ENGAGE_ACT_FLASH_MAX_WIDTH) {
+    engage_error(ENGAGE_RANGE_ERROR.' '.$width, __FUNCTION__);
     $ready = false;
   }
-  if (ENGAGE_ACT_MIN_FLASH_HEIGHT <= $height && $height <= ENGAGE_ACT_MAX_FLASH_HEIGHT) {
-    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+  if (ENGAGE_ACT_FLASH_MIN_HEIGHT >= $height && $height <= ENGAGE_ACT_FLASH_MAX_HEIGHT) {
+    engage_error(ENGAGE_RANGE_ERROR.' '.$height, __FUNCTION__);
     $ready = false;
   }
-  if (ENGAGE_ACT_MIN_FLASH_EWIDTH <= $ewidth && $ewidth <= ENGAGE_ACT_MAX_FLASH_EWIDTH) {
-    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+  if (ENGAGE_ACT_FLASH_MIN_EWIDTH >= $ewidth && $ewidth <= ENGAGE_ACT_FLASH_MAX_EWIDTH) {
+    engage_error(ENGAGE_RANGE_ERROR.' '.$ewidth, __FUNCTION__);
     $ready = false;
   }
-  if (ENGAGE_ACT_MIN_FLASH_EHEIGHT <= $eheight && $eheight <= ENGAGE_ACT_MAX_FLASH_EHEIGHT) {
-    engage_error(ENGAGE_RANGE_ERROR, __FUNCTION__);
+  if (ENGAGE_ACT_FLASH_MIN_EHEIGHT >= $eheight && $eheight <= ENGAGE_ACT_FLASH_MAX_EHEIGHT) {
+    engage_error(ENGAGE_RANGE_ERROR.' '.$eheight, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
     $flash_array = array();
     if (is_array($media_flash)) {
-      if (count($media_flash) < ENGAGE_ACT_MAX_FLASH_COUNT) {
+      if (count($media_flash) < ENGAGE_ACT_FLASH_MAX_COUNT) {
         $flash_array = $media_flash;
       } else {
         engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
@@ -231,7 +235,7 @@ function engage_activity_media_mp3($mp3_url, $title, $artist, $album, $media_mp3
   if ($ready === true){
     $mp3_array = array();
     if (is_array($media_mp3)) {
-      if (count($media_mp3) < ENGAGE_ACT_MAX_MP3_COUNT) {
+      if (count($media_mp3) < ENGAGE_ACT_MP3_MAX_COUNT) {
         $mp3_array = $media_mp3;
       } else {
         engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
