@@ -19,6 +19,7 @@ function engage_lib_init($dev_mode=false) {
   engage_define('ENGAGE_DEV_MODE', $dev_mode);
   engage_define('ENGAGE_API_KEY_LEN', 40);
   engage_define('ENGAGE_TOKEN_LEN', 40);
+  engage_define('ENGAGE_STAT_OK', 'ok');
   engage_define('ENGAGE_POST_SSL', true);
   engage_define('ENGAGE_PARSE_ARRAY', true);
   engage_define('ENGAGE_AUTH_EXTEND', false);
@@ -30,26 +31,29 @@ function engage_lib_init($dev_mode=false) {
   engage_define('ENGAGE_KEY_FORMAT', 'format');
   engage_define('ENGAGE_KEY_EXTEND', 'extended');
   engage_define('ENGAGE_KEY_IDENTIFIER', 'identifier');
+  engage_define('ENGAGE_KEY_STAT', 'stat');
   engage_define('ENGAGE_API_BASE_URL', 'https://rpxnow.com/api/v2/');
   engage_define('ENGAGE_AUTHINFO_EP', 'auth_info');
   engage_define('ENGAGE_ELABEL_DEBUG', 'debug');
   engage_define('ENGAGE_ELABEL_MESSAGE', 'message');
   engage_define('ENGAGE_ELABEL_WARN', 'warning');
   engage_define('ENGAGE_ELABEL_ERROR', 'error');
-  engage_define('ENGAGE_API_KEY_ERROR', 'invalid api key');
-  engage_define('ENGAGE_TOKEN_ERROR', 'invalid token');
-  engage_define('ENGAGE_FORMAT_ERROR', 'invalid format');
-  engage_define('ENGAGE_RANGE_ERROR', 'value out of range');
-  engage_define('ENGAGE_COUNT_ERROR', 'maximum count exceeded');
-  engage_define('ENGAGE_ARRAY_ERROR', 'array expected');
-  engage_define('ENGAGE_STRING_ERROR', 'string expected');
-  engage_define('ENGAGE_INT_ERROR', 'integer expected');
-  engage_define('ENGAGE_JSON_ERROR', 'json decode error');
+  engage_define('ENGAGE_ERROR_POST', 'API POST failure');
+  engage_define('ENGAGE_ERROR_APIKEY', 'invalid api key');
+  engage_define('ENGAGE_ERROR_TOKEN', 'invalid token');
+  engage_define('ENGAGE_ERROR_FORMAT', 'invalid format');
+  engage_define('ENGAGE_ERROR_RANGE', 'value out of range ');
+  engage_define('ENGAGE_ERROR_COUNT', 'maximum count exceeded');
+  engage_define('ENGAGE_ERROR_ARRAY', 'array expected');
+  engage_define('ENGAGE_ERROR_STRING', 'string expected');
+  engage_define('ENGAGE_ERROR_STAT', 'response stat not ok ');
+  engage_define('ENGAGE_ERROR_INT', 'integer expected');
+  engage_define('ENGAGE_ERROR_XML', 'XML error code:');
+  engage_define('ENGAGE_ERROR_IDENT', 'missing identifier');
+  engage_define('ENGAGE_ERROR_JSON', 'json decode error');
   engage_define('ENGAGE_JERROR_DEPTH', ', maximum stack depth exceeded');
   engage_define('ENGAGE_JERROR_CHAR', ', unexpected character found');
   engage_define('ENGAGE_JERROR_SYN', ', malformed JSON');
-  engage_define('ENGAGE_XML_ERROR', 'XML error code:');
-  engage_define('ENGAGE_IDENTIFIER_ERROR', 'missing identifier');
   if (ENGAGE_DEV_MODE === true) {
     if (!version_compare(PHP_VERSION, '5.0.0', '>=')){
       engage_error('PHP version less than required version', __FUNCTION__);
@@ -77,7 +81,7 @@ function engage_define($label, $value) {
 /* end engage_define */
 
 /* begin engage_parse_result */
-function engage_parse_result($result, $format, $array_out=ENGAGE_PARSE_ARRAY) {
+function engage_parse_result($result, $format=ENGAGE_FORMAT_JSON, $array_out=ENGAGE_PARSE_ARRAY) {
   if ($array_out === true) {
     $array = true;
   } else {
@@ -107,7 +111,7 @@ function engage_parse_result($result, $format, $array_out=ENGAGE_PARSE_ARRAY) {
               $json_error = ENGAGE_JERROR_SYN;
           break;
         }
-        engage_error(ENGAGE_JSON_ERROR.$json_error, __FUNCTION__);
+        engage_error(ENGAGE_ERROR_JSON.$json_error, __FUNCTION__);
         return false;
       }
     } elseif ($format == ENGAGE_FORMAT_XML) {
@@ -116,7 +120,7 @@ function engage_parse_result($result, $format, $array_out=ENGAGE_PARSE_ARRAY) {
       if ($decode_result === false) {
         $xml_errors = libxml_get_errors();
         foreach ($xml_errors as $xml_error) {
-          engage_error(ENGAGE_XML_ERROR.$xml_error->code, __FUNCTION__);
+          engage_error(ENGAGE_ERROR_XML.$xml_error->code, __FUNCTION__);
         }
         libxml_clear_errors();
         return false;
@@ -132,50 +136,11 @@ function engage_parse_result($result, $format, $array_out=ENGAGE_PARSE_ARRAY) {
 }
 /* end engage_parse_result */
 
-/* begin engage_auth_info */
-/**
- * http://documentation.janrain.com/engage/api/auth_info
- * Extended requires subscription level of Plus or better.
- */
-function engage_auth_info($api_key, $token, $format=ENGAGE_FORMAT_JSON, $extended=ENGAGE_AUTH_EXTEND) {
-  if ($extended === true) {
-    $extended = 'true';
-  } else {
-    $extended = 'false';
-  }
-  $ready = true;
-  if (strlen($api_key) != ENGAGE_API_KEY_LEN) {
-    engage_error(ENGAGE_API_KEY_ERROR, __FUNCTION__);
-    $ready = false;
-  }
-  if (strlen($token) != ENGAGE_TOKEN_LEN) {
-    engage_error(ENGAGE_TOKEN_ERROR, __FUNCTION__);
-    $ready = false;
-  }
-  if (!in_array($format, explode(',',ENGAGE_FORMATS))) {
-    engage_error(ENGAGE_FORMAT_ERROR, __FUNCTION__);
-    $ready = false;
-  }
-  if ($ready === true){
-    $url = ENGAGE_API_BASE_URL.ENGAGE_AUTHINFO_EP;
-    $parameters = array(
-      ENGAGE_KEY_APIKEY => $api_key,
-      ENGAGE_KEY_TOKEN => $token,
-      ENGAGE_KEY_FORMAT => $format,
-      ENGAGE_KEY_EXTEND => $extended
-    );
-    $result = engage_post($url, $parameters);
-    return $result;
-  }
-  return false;
-}
-/* end engage_auth_info */
-
 /* begin engage_post */
 function engage_post($url, $parameters, $ssl=ENGAGE_POST_SSL) {
   $curl = curl_init();
   if ($curl == false) {
-    engage_error(ENGAGE_CURL_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_CURL, __FUNCTION__);
     return false;
   }
   engage_error('parameters: ' . print_r($parameters, true), __FUNCTION__, ENGAGE_ELABEL_DEBUG);  

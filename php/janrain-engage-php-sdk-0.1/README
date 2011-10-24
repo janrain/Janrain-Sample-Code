@@ -3,14 +3,11 @@ This SDK consists of the engage.lib.php (the SDK),
  *Denotes files with configuration settings.
 
 SDK:
-Currently has auth_info and get_contacts implemented.
- library/engage.lib.php
-
-Experimental:
-Activity API basic posting.
+Currently has auth_info, activity, and get_contacts implemented.
  library/engage.activity.lib.php
-  Note:
-   Include after engage.lib.php
+ libaray/engage.api.lib.php
+ library/engage.auth.lib.php
+ library/enage.contacts.lib.php
 
 Example Token URL PHP:
 A small example token URL script that uses the library.
@@ -18,8 +15,8 @@ This is setup to allow for a clean URL.
 
  token/index.php
   Uses:
-    ../library/engage.lib.php
-    ./engage-contacts.php
+    ../library/engage.auth.lib.php
+     ../libarary/engage.api.lib.php
     ./engage-conf.php *
 
 
@@ -29,7 +26,8 @@ then load the console folder location in your browser.
 
  console/index.php
  Uses:
-  ../library/engage.lib.php
+  ../library/engage.auth.lib.php
+   ../libarary/engage.api.lib.php
   ./index.inc.php
   ./style.css
   ./console.conf.php *

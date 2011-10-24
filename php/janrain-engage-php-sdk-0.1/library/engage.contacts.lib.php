@@ -4,6 +4,12 @@
  * Janrain Inc.
  * All rights reserved.
  */
+/**
+ * Requires engage.api.lib.php
+ */
+if ( !defined('ENGAGE_LIB_INIT') ) {
+  require_once('engage.api.lib.php');
+}
 
 if (defined('ENGAGE_LIB_INIT')) {
   if (ENGAGE_LIB_INIT === true) {
@@ -27,15 +33,15 @@ if (defined('ENGAGE_LIB_INIT')) {
 function engage_get_contacts($api_key, $identifier, $format=ENGAGE_FORMAT_JSON) {
   $ready = true;
   if (strlen($api_key) != ENGAGE_API_KEY_LEN) {
-    engage_error(ENGAGE_API_KEY_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_APIKEY, __FUNCTION__);
     $ready = false;
   }
   if (empty($identifier)) {
-    engage_error(ENGAGE_IDENTIFIER_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_IDENT, __FUNCTION__);
     $ready = false;
   }
   if (!in_array($format, explode(',',ENGAGE_FORMATS))) {
-    engage_error(ENGAGE_FORMAT_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_FORMAT, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){

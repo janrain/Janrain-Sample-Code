@@ -1,4 +1,15 @@
-<?PHP
+<?php
+/**
+ * Copyright 2011
+ * Janrain Inc.
+ * All rights reserved.
+ */
+/**
+ * Requires engage.api.lib.php
+ */
+if ( !defined('ENGAGE_LIB_INIT') ) {
+  require_once('engage.api.lib.php');
+}
 
 //init
 engage_define('ENGAGE_ACTIVITY_EP', 'activity');
@@ -14,15 +25,17 @@ engage_define('ENGAGE_ACT_FLASH_MAX_EWIDTH', 398);
 engage_define('ENGAGE_ACT_FLASH_MIN_EHEIGHT', 30);
 engage_define('ENGAGE_ACT_FLASH_MAX_EHEIGHT', 398);
 
-engage_define('ENGAGE_ACTVITYTRUNCATE', 'true');
-engage_define('ENGAGE_URLSHORTENING', 'true');
+engage_define('ENGAGE_TRUNCATE', 'true');
+engage_define('ENGAGE_URLSHORT', 'true');
+engage_define('ENGAGE_PRENAME', 'true');
 
 engage_define('ENGAGE_ACTIVITY_PROVIDERS', 'LinkedIn,Twitter,Facebook,Yahoo!,MySpace');
 
 engage_define('ENGAGE_KEY_ACTIVITY', 'activity');
 engage_define('ENGAGE_KEY_TRUNCATE', 'truncate');
 engage_define('ENGAGE_KEY_LOCATION', 'location');
-engage_define('ENGAGE_KEY_URLSHORTENING', 'url_shortening');
+engage_define('ENGAGE_KEY_URLSHORT', 'url_shortening');
+engage_define('ENGAGE_KEY_PRENAME', 'prepend_name');
 
 engage_define('ENGAGE_ACT_KEY_MEDIA', 'media');
 engage_define('ENGAGE_ACT_KEY_URL', 'url');
@@ -66,18 +79,18 @@ engage_define('ENGAGE_ACT_TYPE_MP3', 'mp3');
  * choose only one of these types. This is the order Facebook will use to select: 
  * image, flash, mp3 (a.k.a. music)
  */
-function engage_activity($api_key, $identifier, $activity, $truncate = ENGAGE_ACTVITYTRUNCATE, $url_shortening = ENGAGE_URLSHORTENING, $location = NULL) {
+function engage_activity($api_key, $identifier, $activity, $location=NULL, $truncate=ENGAGE_TRUNCATE, $url_shortening=ENGAGE_URLSHORT, $prepend_name=ENGAGE_PRENAME) {
   $ready = true;
   if (strlen($api_key) != ENGAGE_API_KEY_LEN) {
-    engage_error(ENGAGE_API_KEY_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_APIKEY, __FUNCTION__);
     $ready = false;
   }
   if (empty($identifier)) {
-    engage_error(ENGAGE_IDENTIFIER_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_IDENT, __FUNCTION__);
     $ready = false;
   }
   if (!is_array($activity)) {
-    engage_error(ENGAGE_ARRAY_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_ARRAY, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
@@ -88,12 +101,22 @@ function engage_activity($api_key, $identifier, $activity, $truncate = ENGAGE_AC
       ENGAGE_KEY_IDENTIFIER => $identifier,
       ENGAGE_KEY_ACTIVITY => $activity,
       ENGAGE_KEY_TRUNCATE => $truncate,
-      ENGAGE_KEY_URLSHORTENING => $url_shortening
+      ENGAGE_KEY_URLSHORT => $url_shortening,
+      ENGAGE_KEY_PRENAME => $prepend_name
     );
     if ($location !== NULL) {
       $parameters[ENGAGE_KEY_LOCATION] = $location;
     }
     $result = engage_post($url, $parameters);
+    if ($result !== false) {
+      $response = engage_parse_result($result);
+      if (is_array($response)) {
+        if ($response[ENGAGE_KEY_STAT] != ENGAGE_STAT_OK) {
+          engage_error(ENGAGE_ERROR_STAT.$result, __FUNCTION__);
+          return false;
+        }
+      }
+    }
     return $result;
   }
   return false;
@@ -104,7 +127,7 @@ function engage_activity($api_key, $identifier, $activity, $truncate = ENGAGE_AC
 function engage_activity_item($base, $media=NULL, $action_links=NULL, $properties=NULL) {
   $ready = true;
   if (!is_array($base)) {
-    engage_error(ENGAGE_ARRAY_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_ARRAY, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
@@ -122,7 +145,7 @@ function engage_activity_item($base, $media=NULL, $action_links=NULL, $propertie
 function engage_activity_base($url, $action, $user_content=NULL, $title=NULL, $description=NULL) {
   $ready = true;
   if (!is_string($url) || !is_string($action)) {
-    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_STRING, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
@@ -149,7 +172,7 @@ function engage_activity_base($url, $action, $user_content=NULL, $title=NULL, $d
 function engage_activity_media_image($src_url, $href_url, $media_image=NULL) {
   $ready = true;
   if (!is_string($src_url) || !is_string($href_url)) {
-    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_STRING, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
@@ -158,7 +181,7 @@ function engage_activity_media_image($src_url, $href_url, $media_image=NULL) {
       if (count($media_image) < ENGAGE_ACT_IMAGE_MAX_COUNT) {
         $image_array = $media_image;
       } else {
-        engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
+        engage_error(ENGAGE_ERROR_COUNT, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
         return $media_image;
       }
     }
@@ -177,27 +200,27 @@ function engage_activity_media_image($src_url, $href_url, $media_image=NULL) {
 function engage_activity_media_flash($swf_url, $thumb_url, $width, $height, $ewidth, $eheight, $media_flash=NULL) {
   $ready = true;
   if (!is_string($swf_url) || !is_string($thumb_url)) {
-    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_STRING, __FUNCTION__);
     $ready = false;
   }
   if (!is_int($width) || !is_int($height) || !is_int($ewidth) || !is_int($eheight)) {
-    enagage_error(ENGAGE_INT_ERROR, __FUNCTION__);
+    enagage_error(ENGAGE_ERROR_INT, __FUNCTION__);
     $ready = false;
   }
   if (ENGAGE_ACT_FLASH_MIN_WIDTH >= $width && $width <= ENGAGE_ACT_FLASH_MAX_WIDTH) {
-    engage_error(ENGAGE_RANGE_ERROR.' '.$width, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_RANGE.$width, __FUNCTION__);
     $ready = false;
   }
   if (ENGAGE_ACT_FLASH_MIN_HEIGHT >= $height && $height <= ENGAGE_ACT_FLASH_MAX_HEIGHT) {
-    engage_error(ENGAGE_RANGE_ERROR.' '.$height, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_RANGE.$height, __FUNCTION__);
     $ready = false;
   }
   if (ENGAGE_ACT_FLASH_MIN_EWIDTH >= $ewidth && $ewidth <= ENGAGE_ACT_FLASH_MAX_EWIDTH) {
-    engage_error(ENGAGE_RANGE_ERROR.' '.$ewidth, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_RANGE.$ewidth, __FUNCTION__);
     $ready = false;
   }
   if (ENGAGE_ACT_FLASH_MIN_EHEIGHT >= $eheight && $eheight <= ENGAGE_ACT_FLASH_MAX_EHEIGHT) {
-    engage_error(ENGAGE_RANGE_ERROR.' '.$eheight, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_RANGE.$eheight, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
@@ -206,7 +229,7 @@ function engage_activity_media_flash($swf_url, $thumb_url, $width, $height, $ewi
       if (count($media_flash) < ENGAGE_ACT_FLASH_MAX_COUNT) {
         $flash_array = $media_flash;
       } else {
-        engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
+        engage_error(ENGAGE_ERROR_COUNT, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
         return $media_flash;
       }
     }
@@ -229,7 +252,7 @@ function engage_activity_media_flash($swf_url, $thumb_url, $width, $height, $ewi
 function engage_activity_media_mp3($mp3_url, $title, $artist, $album, $media_mp3=NULL) {
   $ready = true;
   if (!is_string($mp3_url) || !is_string($title) || !is_string($artist) || !is_string($album)) {
-    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_STRING, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true){
@@ -238,7 +261,7 @@ function engage_activity_media_mp3($mp3_url, $title, $artist, $album, $media_mp3
       if (count($media_mp3) < ENGAGE_ACT_MP3_MAX_COUNT) {
         $mp3_array = $media_mp3;
       } else {
-        engage_error(ENGAGE_COUNT_ERROR, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
+        engage_error(ENGAGE_ERROR_COUNT, __FUNCTION__, ENGAGE_ETYPE_DEBUG);
         return $media_mp3;
       }
     }
@@ -259,7 +282,7 @@ function engage_activity_media_mp3($mp3_url, $title, $artist, $album, $media_mp3
 function engage_activity_action_link($action_url, $action_text) {
   $ready = true;
   if (!is_string($action_url) || !is_string($action_text)) {
-    engage_error(ENGAGE_STRING_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_STRING, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true) {
@@ -279,7 +302,7 @@ function engage_activity_action_link($action_url, $action_text) {
 function engage_activity_properties($properties_array) {
   $ready = true;
   if (!is_array($properties_array) || empty($properties_array)) {
-    engage_error(ENGAGE_ARRAY_ERROR, __FUNCTION__);
+    engage_error(ENGAGE_ERROR_ARRAY, __FUNCTION__);
     $ready = false;
   }
   if ($ready === true) {

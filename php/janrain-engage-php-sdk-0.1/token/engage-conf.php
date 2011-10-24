@@ -10,21 +10,8 @@
  */
 $api_key = 'api key here';
 /**
- * Set $engage_pro to true if you have
- * a Pro or better subscription.
+ * Pro and Enterprise customers may 
+ * wish to collect the extended data.
  */
-$engage_pro = false;
-
-/**
- * Enable get_contacts after auth_info.
- * This should not be done inline with auth_info in production.
- */
-$do_get_contacts = false;
-
-/**
- * Enable activity post after auth_info.
- * This should not be done inline with auth_info in production.
- * Requires experimental activity library.
- */
-$do_activity = false;
+$auth_info_extended = false;
 ?>
