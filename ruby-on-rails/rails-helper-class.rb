@@ -1,6 +1,8 @@
-/*
- *Ruby Helper Class for Janrain Engage
- */
+#
+# Ruby Helper Class for Janrain Engage
+#
+require 'rubygems'
+require 'cgi'
 require 'uri'
 require 'net/http'
 require 'net/https'
