@@ -4,7 +4,7 @@
  * Janrain Inc.
  * All rights reserved.
  */
-if ($_GET['go'] != 'true') {
+if (!isset($_GET['go']) || $_GET['go'] != 'true') {
 ?>
 <html>
 <head>
