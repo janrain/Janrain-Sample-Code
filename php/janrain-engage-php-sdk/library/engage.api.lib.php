@@ -179,9 +179,12 @@ function engage_error($error, $function='unknown', $label=ENGAGE_ELABEL_ERROR){
 /* begin engage_get_errors */
 function engage_get_errors($label=NULL) {
   global $engage_errors;
+  if (!is_array($engage_errors)){
+    $engage_errors = array();
+  }
   $return_errors = array();
   if ($label === NULL) {
-  $return_errors =  $engage_errors;
+    $return_errors =  $engage_errors;
   } else {
     foreach($engage_errors as $key=>$val) {
       if ($label == $val) {
