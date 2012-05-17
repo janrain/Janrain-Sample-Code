@@ -1,6 +1,6 @@
 <?php
 /*
- * This script is intended an educational tool.
+ * This script is intended as an educational tool.
  * Please look at the PHP SDK if you are looking for somthing suited to a new project.
  * https://github.com/janrain/Janrain-Sample-Code/tree/master/php/janrain-engage-php-sdk
  */
