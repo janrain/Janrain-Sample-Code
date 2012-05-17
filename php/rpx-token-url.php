@@ -1,4 +1,10 @@
 <?php
+/*
+ * This script is intended an educational tool.
+ * Please look at the PHP SDK if you are looking for somthing suited to a new project.
+ * https://github.com/janrain/Janrain-Sample-Code/tree/master/php/janrain-engage-php-sdk
+ */
+
 ob_start();
 /*
  Below is a very simple and verbose PHP 5 script that implements the Engage token URL processing and some popular Pro/Enterprise examples.
