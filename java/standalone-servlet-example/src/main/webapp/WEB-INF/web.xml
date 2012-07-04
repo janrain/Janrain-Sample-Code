@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+id="WebApp_ID" version="2.5">
+	<display-name>Example auth_info call.</display-name>
+	<servlet>
+		<servlet-name>AuthInfo</servlet-name>
+		<servlet-class>com.janrain.example.AuthInfo</servlet-class>
+    <init-param>
+      <param-name>apiKey</param-name>
+      <param-value>YOUR_JANRAIN_API_KEY_HERE</param-value>
+    </init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AuthInfo</servlet-name>
+		<url-pattern>/callback_url</url-pattern>
+	</servlet-mapping>
+
+</web-app>
