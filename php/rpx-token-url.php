@@ -11,8 +11,10 @@ ob_start();
  The code below assumes you have the CURL HTTP fetching library with SSL.  
 */
 
-//For a production script it would be better to include the apiKey in from a file outside the web root to enhance security.
-$rpx_api_key = 'YOUR API KEY';
+// PATH_TO_API_KEY_FILE should contain a path to a plain text file containing only
+// your API key. This file should exist in a path that can be read by your web server,
+// but not publicly accessible to the Internet.
+$rpx_api_key = trim( file_get_contents( "PATH_TO_API_KEY_FILE" ) );
 
 /*
  Set this to true if your application is Pro or Enterprise.
