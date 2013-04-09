@@ -14,7 +14,7 @@ ob_start();
 // PATH_TO_API_KEY_FILE should contain a path to a plain text file containing only
 // your API key. This file should exist in a path that can be read by your web server,
 // but not publicly accessible to the Internet.
-$rpx_api_key = trim( file_get_contents( "PATH_TO_API_KEY_FILE" ) );
+$rpx_api_key = trim( file_get_contents( "http://dev.managedcoder.com/womenworking/api_key.php" ) );
 
 /*
  Set this to true if your application is Pro or Enterprise.
