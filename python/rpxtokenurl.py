@@ -20,6 +20,7 @@ import requests
 
 # Step 2) Now that we have the token, we need to make the api call to auth_info.
 # auth_info expects an HTTP Post with the following paramters:
+
 engage_api_params = {
     'token': token,
     'apiKey': 'REPLACE_WITH_YOUR_RPX_API_KEY',
