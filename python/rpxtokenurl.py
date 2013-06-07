@@ -58,6 +58,3 @@ if auth_info['stat'] == 'ok':
    
 else:
     print 'An error occured: ' + auth_info['err']['msg']
-
-
- 
