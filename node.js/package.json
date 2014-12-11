@@ -1,8 +1,7 @@
 {
   "name": "Janrain-Sample-Code",
   "version": "0.0.0",
-  "description": "Sample Janrain Logins",
-  "main": "rpx.js",
+
   "dependencies": {
     "concat-stream": "~1.4.7",
     "ecstatic": "~0.5.7",
@@ -23,7 +22,6 @@
     "janrain"
   ],
   "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/janrain/Janrain-Sample-Code/issues"
   },
