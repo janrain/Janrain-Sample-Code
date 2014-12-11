@@ -1,0 +1,31 @@
+{
+  "name": "Janrain-Sample-Code",
+  "version": "0.0.0",
+  "description": "Sample Janrain Logins",
+  "main": "rpx.js",
+  "dependencies": {
+    "concat-stream": "~1.4.7",
+    "ecstatic": "~0.5.7",
+    "request": "~2.51.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:janrain/Janrain-Sample-Code.git"
+  },
+  "keywords": [
+    "social",
+    "login",
+    "example",
+    "janrain"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/janrain/Janrain-Sample-Code/issues"
+  },
+  "homepage": "https://github.com/janrain/Janrain-Sample-Code"
+}
