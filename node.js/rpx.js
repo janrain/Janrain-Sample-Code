@@ -7,7 +7,7 @@ var ecstatic = require('ecstatic');
 var request = require('request');
 var concatStream = require('concat-stream');
 
-var staticHandler = ecstatic(__dirname)
+var staticHandler = ecstatic(__dirname);
 
 http.createServer(function(request, response) {
   if (request.method === "GET") return staticHandler(request, response);
@@ -24,8 +24,9 @@ http.createServer(function(request, response) {
     var url = "https://rpxnow.com/api/v2/auth_info?" + query_params;
     console.log("Requesting URL: ", url);
     request(url).pipe(response);
-  }))
+  }));
   }
-}).listen(5000);
+)
+.listen(5000);
 
 console.log('Server running at http://localhost:5000/');
