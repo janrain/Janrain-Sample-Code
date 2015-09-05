@@ -34,6 +34,7 @@ if ($token) {
     $result = curl_helper_post($curl, $url, $post_data);
     if ($result == false) {
         curl_helper_error($curl, $url, $post_data);
+        die();
     }
     curl_close($curl);
 
@@ -55,10 +56,8 @@ if ($token) {
 
     } else {
         // Handle the auth_info error.
-        echo "\nAn error occured: $auth_info[err][msg]\n";
-        var_dump($auth_info);
-        echo "\n";
-        var_dump($result);
+        output('An error occurred', $auth_info);
+        output('result', $result);
     }
 } else {
     echo 'No authentication token.';
