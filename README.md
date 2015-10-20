@@ -14,12 +14,10 @@ implementation. To see the examples in action, do the following:
 1. `git clone git@github.com:janrain/Janrain-Sample-Code.git`
 1. `cd Janrain-Sample-Code/widget-examples`
 1. `npm install`
-1. Edit line 7 of `server.js`, replacing `_PLACE_YOUR_API_KEY_HERE_` with
-   your Janrain API key.
-1. Edit line 13 of `modal-non-redirect-signin.html`, replacing
-   `_YOUR_APP_NAME_HERE_` with your Janrain app name. Your app name will be the
-   subdomain section of your Application Domain (which you can find by visiting
-   the settings screen on the Janrain Dashboard).
+1. Edit line 7 of `server.js`, replacing `_API_KEY_` with your Janrain API key.
+1. Edit line 1 of `application_domain.js`, replacing `_APPLICATION_DOMAIN_` with
+   your Janrain Application Domain, which you can find by visiting the settings
+   page on the Janrain Dashboard.
 1. Now start the server with `node server.js`
 1. That's it! You should now be able to access the examples at
    [http://localhost:3000](http://localhost:3000).
