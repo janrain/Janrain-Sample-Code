@@ -73,11 +73,7 @@ function janrainWidgetOnload() {
   // Then, we cycle through each button and attach each to a provider.
   for(var i = 0; i < buttons.length; i++) {
     var button = buttons[i];
-    button.onclick = (function(b) {
-      return function() {
-        janrain.engage.signin.triggerFlow(b.id);
-      };
-    }(button));
+    janrain.engage.signin.setProviderFlow(button, button.id);
   }
 
   // This event fires once Janrain's Social Login service has responded with the
