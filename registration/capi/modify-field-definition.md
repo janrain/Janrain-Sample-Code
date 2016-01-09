@@ -1,3 +1,4 @@
+```
 {
   "type": "text",
   "name": "myCustomTextField",
@@ -19,3 +20,4 @@
     }
   ]
 }
+```
