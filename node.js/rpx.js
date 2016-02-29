@@ -25,7 +25,6 @@ http.createServer(function(request, response) {
     console.log("Requesting URL: ", url);
     request(url).pipe(response);
   }))
-  }
 }).listen(5000);
 
 console.log('Server running at http://localhost:5000/');
