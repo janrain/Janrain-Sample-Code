@@ -24,7 +24,7 @@ NSDictionary *makeSignedAuthHeader(
     NSString *signature = [HMAC base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSArray *authHeaderPieces = [NSArray arrayWithObjects:clientId,signature, nil];
     NSDictionary *authHeader = @{
-        @"Authorization" : @"Authorization" : [@"Signature " stringByAppendingString:[authHeaderPieces componentsJoinedByString:@":"]]
+        @"Authorization" : [@"Signature " stringByAppendingString:[authHeaderPieces componentsJoinedByString:@":"]]
     };
     return authHeader;
 }
