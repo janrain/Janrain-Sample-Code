@@ -1,6 +1,6 @@
 ## Add UUID to on-page Javascript
 
-### Page needs to have BlueKai *iframe* and *bk-coretag.js* script loaded without the call to *bk_doJSTag*.
+### Page needs to have BlueKai iframe and bk-coretag.js script loaded without the call to bk_doJSTag.
 
 ```html
 <!-- Begin BlueKai Tag -->
@@ -18,7 +18,7 @@
 
 ```javascript
 function bk_init(uuid, siteId, pixelLimit) {
-    bk_addPageCtx("id", uuid);      // NOTE: "id" maybe different.
+    bk_addPageCtx("id", uuid);      // NOTE: "id" may be different.
     bk_doJSTag(siteId, pixelLimit);
 }
 ```
@@ -29,14 +29,14 @@ function bk_init(uuid, siteId, pixelLimit) {
 function bk_inject_script() {
     var script   = document.createElement("script");
     script.type  = "text/javascript";
-    // You may want to use script.src to load the script from a file rather then a inline script.
+    // You may want to use script.src to load the script from a file rather then an inline script.
     script.text  = "var uuid = janrain.capture.ui.getProfileCookieData('uuid')); bk_init(uuid, siteId, pixelLimit);"
 
     document.body.appendChild(script);
 }
 ```
 
-### Register a funtion which will inject our initilization when the uuid is available.
+### Register a funtion which will inject our initilization script when the uuid is available.
 
 ```javascript
 janrain.events.onCaptureProfileCookieSet.addHandler(function(){
