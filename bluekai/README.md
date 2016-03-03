@@ -13,10 +13,10 @@
 <script type="text/javascript">
 bk_doJSTag(32015, 1);           // Change 32015 to your container id.
 </script>
-<!-- End BlueKai Tag --> 
+<!-- End BlueKai Tag -->
 ```
 
-### Your page needs to have BlueKai iframe and bk-coretag.js script loaded without the script that calls bk_doJSTag.
+### Your page needs to have the BlueKai iframe and bk-coretag.js script loaded without the script that calls bk_doJSTag.
 
 ```html
 <!-- Begin BlueKai Tag -->
@@ -36,8 +36,7 @@ bk_doJSTag(32015, 1);           // Change 32015 to your container id.
 janrain.events.onCaptureProfileCookieSet.addHandler(function(){
     var uuid = janrain.capture.ui.getProfileCookieData('uuid');
     bk_addPageCtx("id", uuid);      // NOTE: "id" may be different.
-    # Add Any other customimization
+    // Add any other customizations
     bk_doJSTag(32015, 1);           // Change 32015 to your container id.
 });
-
 ```
