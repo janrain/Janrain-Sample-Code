@@ -6,7 +6,7 @@ janrain.events.onCaptureLoginSuccess.addHandler(function(response) {
 })
 ```
 
-### How do I get a user's display name from localStorage after they have logged in?
+### How do I get a user's display name from localStorage after the user has logged in?
 
 ```javascript
 janrain.events.onCaptureLoginSuccess.addHandler(function(response) {
@@ -16,7 +16,7 @@ janrain.events.onCaptureLoginSuccess.addHandler(function(response) {
 })
 ```
 
-### onCaptureSaveSuccess fires when a user updates anything in their record, but I want to show a specific message when a user updates their password. How can I do that?
+### I want to show a specific message when the user's password is updated.
 
 ```javascript
 janrain.events.onCaptureSaveSuccess.addHandler(function(response) {
@@ -28,7 +28,7 @@ janrain.events.onCaptureSaveSuccess.addHandler(function(response) {
 })
 ```
 
-### When an existing user logs in with Twitter for the first time, they get an error message on the Almost done screen when they try to fill in the email address that they previously registered with. How do I display a different error message to these users when the "unique" validation error message is displayed suggesting that they go back and log in with their other credentials?
+### When an existing user logs in with Twitter for the first time, the user gets an error message on the Almost Done screen when the user tries to fill in the email address that the user previously registered with. How do I display a different error message to these users when the `unique` validation error message is displayed suggesting that the user go back and log in with the user's other credentials?
 
 ```javascript
 janrain.events.onCaptureRenderComplete.addHandler(function(response) {
