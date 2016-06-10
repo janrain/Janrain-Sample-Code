@@ -47,7 +47,7 @@ public class SignedRequest {
     System.out.println(makeSignedAuthHeader(
       "/entity.find",
       params,
-      "Fri, 26 Feb 2016 19:08:44 GMT",
+      "2016-02-26 19:08:44",
       "apkrahlfumwse2e9nvrrotv6vchuptzw",
       "rylicq8ydkz0vmki3gqaoxbk4gyrr05t"
     ));
