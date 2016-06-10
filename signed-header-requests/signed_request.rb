@@ -12,7 +12,7 @@ end
 puts make_signed_auth_header(
   '/entity.find',
   { 'entity_type': 'user', 'filter': "lastUpdated >= '2016-01-01'" },
-  'Fri, 26 Feb 2016 19:08:44 GMT',
+  '2016-02-26 19:08:44',
   'apkrahlfumwse2e9nvrrotv6vchuptzw',
   'rylicq8ydkz0vmki3gqaoxbk4gyrr05t'
 )
