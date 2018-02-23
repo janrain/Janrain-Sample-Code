@@ -1,0 +1,2483 @@
+{
+	"info": {
+		"name": "Janrain Flow Configuration API",
+		"_postman_id": "11b66c4e-4896-1985-7e57-01a502c7c7e7",
+		"description": "For use when working with the Flow Configuration component of Registration which includes names, versions, fields, forms, screens, locales, translations, mail templates, and userData.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "flows",
+			"item": [
+				{
+					"name": "/config/:app_id/flows",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows"
+							]
+						},
+						"description": "Returns a list of flows.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns the current version of the flow.\n\n\nParameters:\n\nflow: The flow name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userData\": [\n    \"email\",\n    \"displayName\",\n    \"familyName\",\n    \"primaryAddress.country\"\n  ],\n  \"schemas\": [\n    \"myCoolEntityType\"\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Updates/replaces userData object and/or entityTypes in the flow. userData lists the schema attributes to store in the janrainCaptureProfileData object in Local Storage for a logged-in user.\n\n\nParameters:\n\nflow: The flow name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/copy",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"newFlowName\"\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/copy",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"copy"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Creates a new flow by copying an existing flow. The name attribute in the\nrequest specifies the name of the new flow.  This endpoint cannot be used to overwrite an existing flow. \n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/versions",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/versions",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"versions"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a list of all versions for a particular flow, along with a change note for each version.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/versions/:version",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/versions/:version",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"versions",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns the version of the flow.\n\n\nParameters:\n\nversion: \n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/versions/:version",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/versions/:version",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"versions",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Restores flow to version\n\n\nParameters:\n\nversion: \n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "fields",
+			"item": [
+				{
+					"name": "/config/:app_id/flows/:flow/fields",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/fields",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"fields"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a list of fields defined in the flow.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/fields",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"text\",\n  \"name\": \"myCustomTextField\",\n  \"schemaAttribute\": \"displayName\",\n  \"label\": {\n    \"key\": \"b6ced670-7140-4446-9839-da3474860b1a\"\n  },\n  \"tip\": {\n    \"key\": \"8b93448a-6f00-448c-952b-0f1536107cf7\"\n  },\n  \"socialProfileData\": \"profile.displayName\",\n  \"placeholder\": {\n    \"key\": \"6e15067b-2ca5-43c3-af96-930766d63375\"\n  },\n  \"validation\": [\n    {\n      \"rule\": \"required\",\n      \"value\": true,\n      \"message\": {\n        \"key\": \"bb2b21a1-98df-4dce-84f7-534013c46225\"\n      }\n    },\n    {\n      \"rule\": \"unique\",\n      \"value\": true,\n      \"message\": {\n        \"key\": \"63f7c18f-521a-4b4f-94c4-0b04b870c82e\"\n      }\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/fields",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"fields"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Adds a field to the flow. The `schemaAttribute` must be a dot-separated\npath to an existing schema attribute. Call the\n[schemas endpoint](#/registration/{app}/schemas/{schema}) for a list\nof valid attributes.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/fields/:field",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/fields/:field",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"fields",
+								":field"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "field",
+									"value": ""
+								}
+							]
+						},
+						"description": "Returns a field definition from the flow. Includes validations.\n\n\nParameters:\n\nfield: The field name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/fields/:field",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"text\",\n  \"name\": \"myCustomTextField\",\n  \"schemaAttribute\": \"displayName\",\n  \"label\": {\n    \"key\": \"b6ced670-7140-4446-9839-da3474860b1a\"\n  },\n  \"tip\": {\n    \"key\": \"8b93448a-6f00-448c-952b-0f1536107cf7\"\n  },\n  \"socialProfileData\": \"profile.displayName\",\n  \"placeholder\": {\n    \"key\": \"6e15067b-2ca5-43c3-af96-930766d63375\"\n  },\n  \"validation\": [\n    {\n      \"rule\": \"required\",\n      \"value\": true,\n      \"message\": {\n        \"key\": \"bb2b21a1-98df-4dce-84f7-534013c46225\"\n      }\n    },\n    {\n      \"rule\": \"unique\",\n      \"value\": true,\n      \"message\": {\n        \"key\": \"63f7c18f-521a-4b4f-94c4-0b04b870c82e\"\n      }\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/fields/:field",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"fields",
+								":field"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Updates/replaces a field in the flow.\n\n\nParameters:\n\nfield: The field name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/fields/:field",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "delete",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/fields/:field?force=",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"fields",
+								":field"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": ""
+								}
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Removes a field from the flow. Also removes the field from any forms that were\nusing it.\n\n\nParameters:\n\nfield: The field name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/fields",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZTVlZGp1OXVzc2R3bWdqcDVjeTk4dHc2N2tieXZzNmE6NXVxOWJ6N3M4cTdkeTVqa2c1ZnR5ZmsyajdlcWE1anI="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/fields",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"fields"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": "en-US"
+								}
+							]
+						},
+						"description": "Returns a list of fields defined in the flow. Alias of\n`/config/{app}/flows/{flow}/fields`.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/fields",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"text\",\n  \"name\": \"myCustomTextField\",\n  \"schemaAttribute\": \"displayName\",\n  \"label\": \"foo\",\n  \"tip\": \"foo\",\n  \"socialProfileData\": \"profile.displayName\",\n  \"placeholder\": \"foo\",\n  \"validation\": [\n    {\n      \"rule\": \"required\",\n      \"value\": true,\n      \"message\": \"foo\"\n    },\n    {\n      \"rule\": \"unique\",\n      \"value\": true,\n      \"message\": \"foo\"\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/fields",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"fields"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}"
+								}
+							]
+						},
+						"description": "Adds a field to the flow. Works just like\n`/config/{app}/flows/{flow}/fields/{field}` except translatable values are\naccepted in the locale specified. The `schemaAttribute` must be a dot-\nseparated path to an existing schema attribute. Call the [schemas\nendpoint](#/registration/{app}/schemas/{schema}) for a list of valid\nattributes.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/fields/:field",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/fields/:field",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"fields",
+								":field"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}"
+								},
+								{
+									"key": "field",
+									"value": "emailAddress"
+								}
+							]
+						},
+						"description": "Returns a field definition from the flow translated into the locale specified. Includes validations.\n\n\nParameters:\n\nfield: \n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/fields/:field",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"text\",\n  \"name\": \"myCustomTextField\",\n  \"schemaAttribute\": \"displayName\",\n  \"label\": \"foo\",\n  \"tip\": \"foo\",\n  \"socialProfileData\": \"profile.displayName\",\n  \"placeholder\": \"foo\",\n  \"validation\": [\n    {\n      \"rule\": \"required\",\n      \"value\": true,\n      \"message\": \"foo\"\n    },\n    {\n      \"rule\": \"unique\",\n      \"value\": true,\n      \"message\": \"foo\"\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/fields/:field",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"fields",
+								":field"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Updates/replaces a field in the flow.\n\n\nParameters:\n\nfield: \n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "forms",
+			"item": [
+				{
+					"name": "/config/:app_id/flows/:flow/forms",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/forms",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"forms"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a list of forms in the flow.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/forms/:form",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/forms/:form",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"forms",
+								":form"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a list of fields in a form.\n\n\nParameters:\n\nform: The form name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/forms/:form",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": [\n    {\n      \"name\": \"signInEmailAddress\"\n    },\n    {\n      \"name\": \"currentPassword\"\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/forms/:form",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"forms",
+								":form"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Updates/replaces the list of fields and features in the form.\nAny fields added to the form must already exist in the flow.\n\n\nParameters:\n\nform: The form name.\n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "screens",
+			"item": [
+				{
+					"name": "/config/:app_id/flows/:flow/screens",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/screens",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"screens"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a dictionary of all screens for a flow.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/screens/:screen",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/screens/:screen",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"screens",
+								":screen"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a list of information for a specific screen in a flow.\n\n\nParameters:\n\nscreen: The screen name.\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/screens/:screen",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"modal\": false,\n  \"name\": \"signIn\"\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/screens/:screen",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"screens",
+								":screen"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Updates the modal value for a screen in a flow. Requires 'modal' value as True/False and 'name' of a valid screen name. '_self' path is optional.\n\n\nParameters:\n\nscreen: The screen name.\n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "locales",
+			"item": [
+				{
+					"name": "/config/:app_id/flows/:flow/locales",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a list of locales that are available.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}"
+								}
+							]
+						},
+						"description": "Returns the translation values for a locale.\n\n\nParameters:\n\nlocale: \n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "translations",
+			"item": [
+				{
+					"name": "/config/:app_id/flows/:flow/translations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/csv"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic Y3NwcGM3am52eTNkY3Q0MjZrem55c3Y1cW1rdHB0ZnA6N2E5aGs5dnhmeDZoY20zeXRiaHNlZmo1dGtzYmNybWI="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/translations",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"translations"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a dictionary of all translations.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/translations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "patch",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/csv"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "key,en-US\na8670648-f9f7-4c0b-92cd-e477fe67b617,See ya!\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/translations",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"translations"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Updates existing translations. This endpoint does not delete data.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/translations",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/csv"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "en-US,it-IT\nHello!,Bongiorno!\nGoodbye,Arrivederci!\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/translations",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"translations"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Adds new translation strings to the translations dictionary. You must supply a\nlist of values for each locale defined in the flow. For a list of locales,\ncall\n[/config/{app}/flows/{flow}/locales](#/config/{app}/flows/{flow}/locales).\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/translations/:key",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/translations/:key",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"translations",
+								":key"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								}
+							]
+						},
+						"description": "Returns a dictionary of all translations for a key.\n\n\nParameters:\n\nkey: \n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mails",
+			"item": [
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Y3NwcGM3am52eTNkY3Q0MjZrem55c3Y1cW1rdHB0ZnA6N2E5aGs5dnhmeDZoY20zeXRiaHNlZmo1dGtzYmNybWI="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": "en-US"
+								}
+							]
+						},
+						"description": "Returns a list of all email templates in the specified locale.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates/:template",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates/:template",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates",
+								":template"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": ""
+								},
+								{
+									"key": "template",
+									"value": ""
+								}
+							]
+						},
+						"description": "Returns a single email template in the specified locale.\n\n\nParameters:\n\ntemplate: \n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates/:template",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subject\": \"Verify your email\",\n  \"textBody\": \"Welcome to {*#settings*}{*&site_name*}{*/settings*}, {*#user*}{*&displayName*}{*/user*}! To complete your new registration, just click on or browse to the URL below to verify this email address.\\n\\n{*&email_verification_url*}\\n\",\n  \"htmlBody\": \"<p>\\nWelcome to {*#settings*}{*&site_name*}{*/settings*}, {*#user*}{*&displayName*}{*/user*}! To complete your new registration, just click on or browse to the URL below to verify this email address.\\n</p>\\n<p>\\n<a href=\\\"{*email_verification_url*}\\\">{*email_verification_url*}</a>\\n</p>\\n\"\n}\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates/:template",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates",
+								":template"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": ""
+								},
+								{
+									"key": "template",
+									"value": ""
+								}
+							]
+						},
+						"description": "Update a single email template in the specified locale.\n\n\nParameters:\n\ntemplate: \n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates/:template/body",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [
+							{
+								"key": "Accept",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates/:template/body",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates",
+								":template",
+								"body"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": ""
+								},
+								{
+									"key": "template",
+									"value": ""
+								}
+							]
+						},
+						"description": "Returns the body for this email template in the specified locale.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates/:template/body",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/html"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<p>\nWelcome to {*#settings*}{*&site_name*}{*/settings*}, {*#user*}{*&displayName*}{*/user*}! To complete your new registration, just click on or browse to the URL below to verify this email address.\n</p>\n<p>\n<a href=\\\"{*email_verification_url*}\\\">{*email_verification_url*}</a>\n</p>\n"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates/:template/body",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates",
+								":template",
+								"body"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": ""
+								},
+								{
+									"key": "template",
+									"value": ""
+								}
+							]
+						},
+						"description": "Update the body for this email template in the specified\nlocale. The `Content-Type` header determines whether the\ntext or html version is updated.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates/:template/subject",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "get",
+						"header": [
+							{
+								"key": "Accept",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates/:template/subject",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates",
+								":template",
+								"subject"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": ""
+								},
+								{
+									"key": "template",
+									"value": ""
+								}
+							]
+						},
+						"description": "Returns the subject for this email template in the specified locale.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/config/:app_id/flows/:flow/locales/:locale/mailTemplates/:template/subject",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "put",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Verify your email"
+						},
+						"url": {
+							"raw": "https://v1.api.{{region}}.janrain.com/config/{{registration_app_id}}/flows/:flow/locales/:locale/mailTemplates/:template/subject",
+							"protocol": "https",
+							"host": [
+								"v1",
+								"api",
+								"{{region}}",
+								"janrain",
+								"com"
+							],
+							"path": [
+								"config",
+								"{{registration_app_id}}",
+								"flows",
+								":flow",
+								"locales",
+								":locale",
+								"mailTemplates",
+								":template",
+								"subject"
+							],
+							"variable": [
+								{
+									"key": "flow",
+									"value": "{{flow_name}}"
+								},
+								{
+									"key": "locale",
+									"value": ""
+								},
+								{
+									"key": "template",
+									"value": ""
+								}
+							]
+						},
+						"description": "Update the subject for this email template in the specified locale.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{auth_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{auth_client_id}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "28f3ad54-f876-4a9b-8722-1b795843869a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e3e98e67-77d6-4b82-b255-f06e851c5b7a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
