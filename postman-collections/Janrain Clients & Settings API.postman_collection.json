@@ -1,0 +1,1225 @@
+{
+	"info": {
+		"name": "Janrain Clients & Settings API",
+		"_postman_id": "22f14b3e-e6b2-2277-42f8-b7e3dd9daa38",
+		"description": "For use when working with the Clients & Settings component of Registration which includes api clients and their settings.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "clients",
+			"item": [
+				{
+					"name": "/clients/add",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/add?description=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"add"
+							],
+							"query": [
+								{
+									"key": "description",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "features",
+									"value": "",
+									"equals": true,
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nAdds a client with the description \"Client with direct access\" and\ngives that client the \"direct_access\" feature.\n\n```\ncurl -X POST \\\n-d client_id=12345abcde12345abcde \\\n-d client_secret=edcba54321edcba54321 \\\n-d description='Client with direct read access' \\\n-d features='[\"direct_read_access\"]' \\\nhttps://my-app.janraincapture.com/clients/add\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/clear_whitelist",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/clear_whitelist",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"clear_whitelist"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true,
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nClears the whitelist for a client with the ID value `67890fghij67890fghij`.\n\n```\ncurl -X POST \\\n-d client_id=12345abcde12345abcde \\\n-d client_secret=edcba54321edcba54321 \\\n-d for_client_id=67890fghij67890fghij \\\nhttps://my-app.janraincapture.com/clients/clear_whitelist\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/delete?client_id_for_deletion=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "client_id_for_deletion",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example\n\nDelete a Capture client with the ID value `67890fghij67890fghij`.\n\n```\ncurl -X POST \\\n-d client_id=12345abcde12345abcde \\\n-d client_secret=edcba54321edcba54321\\\n-d client_id_for_deletion=67890fghij67890fghij \\\nhttps://my-app.janraincapture.com/clients/delete\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/list",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/list",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"list"
+							],
+							"query": [
+								{
+									"key": "has_features",
+									"value": "",
+									"equals": true,
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example\n\nGet a list of clients with the features \"direct_access\" and \"image_create\".\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d has_features='[\"direct_access\", \"image_create\"]' \\\n    https://my-app.janraincapture.com/clients/list\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/reset_secret",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/reset_secret?for_client_id=&hours_to_live=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"reset_secret"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": ""
+								},
+								{
+									"key": "hours_to_live",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nGenerate a new client secret for the client with ID `67890fghij67890fghij`.\nThe old client secret will remain valid for 24 hours.\n\n```\ncurl -X POST \\\n-d client_id=12345abcde12345abcde \\\n-d client_secret=edcba54321edcba54321 \\\n-d for_client_id=67890fghij67890fghij \\\n-d hours_to_live=24 \\\nhttps://my-app.janraincapture.com/clients/reset_secret\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/set_description",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/set_description?description=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"set_description"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true,
+									"disabled": true
+								},
+								{
+									"key": "description",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nChange the description of the client with the ID\n\"67890fghij67890fghij\" to \"New client description\".\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d for_client_id=67890fghij67890fghij \\\n    -d description='New client description' \\\n    https://my-app.janraincapture.com/clients/set_description\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/set_features",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/set_features?features=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"set_features"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true,
+									"disabled": true
+								},
+								{
+									"key": "features",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nOverwrite the old features list for the client with ID value\n`67890fghij67890fghij` with a list consisting of the single value `owner`.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d for_client_id=67890fghij67890fghij \\\n    -d features='[\"owner\"]' \\\n    https://my-app.janraincapture.com/clients/set_features\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/clients/set_whitelist",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/clients/set_whitelist?whitelist=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"clients",
+								"set_whitelist"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true,
+									"disabled": true
+								},
+								{
+									"key": "whitelist",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nChange the IP whitelist for the client with the ID\nvalue `67890fghij67890fghij` to an array that includes the IP address\n`123.4.5.6/7890`.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d for_client_id=67890fghij67890fghij \\\n    -d whitelist='[\"123.4.5.6/7890\"]' \\\n    https://my-app.janraincapture.com/clients/set_whitelist\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "settings",
+			"item": [
+				{
+					"name": "/settings/delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/delete?for_client_id=&key=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "key",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nDelete the key \"owner\" for a particular client.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d key=owner \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/settings/delete\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/delete_default",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/delete_default?key=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"delete_default"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nDelete the default value of the key \"foo\", which does not currently\nhave a default value assigned\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d key=foo \\\n    https://my-app.janraincapture.com/settings/delete_default\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/get",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/get?for_client_id=&key=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"get"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "key",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nGet the value of the key \"owner\" for a particular client.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d key=owner \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/settings/get\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/get_default",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/get_default?key=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"get_default"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nGet the value of \"owner,\" which does not have a default value.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d key=owner \\\n    https://my-app.janraincapture.com/settings/get_default\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/get_multi",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/get_multi?for_client_id=&keys=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"get_multi"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "keys",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nFetch the values of \"owner,\" \"level,\" and \"bla\" for a specific client,\nwhere \"bla\" has no client-specific value and no default value.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d keys=[\"bla\",\"level\",\"owner\"] \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/settings/get_multi\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/items",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/items?for_client_id=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"items"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/settings/items\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/keys",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/keys?for_client_id=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"keys"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/settings/keys\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/set",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/set?for_client_id=&key=&value=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"set"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "key",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "value",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nAssign the value \"Robert\" to the key \"owner\" for the client with the\nID `fghi7890fghi7890`.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d key=owner \\\n    -d value=Robert \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/settings/set\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/set_default",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/set_default?key=&value=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"set_default"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "value",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nAssign the value \"default\" to the key \"permissions\".\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d key=permissions \\\n    -d value=default \\\n    https://my-app.janraincapture.com/settings/set_default\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/set_default_multi",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic MmZoa3NlZHNlcDRrdzkyeHM5dWg4M2Y4eXVyZDd1eXA6c3FreGRzNHk3N3llbnBiNWMyZHhuZHpiMmNrOWpjNHM="
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/set_default_multi?items=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"set_default_multi"
+							],
+							"query": [
+								{
+									"key": "items",
+									"value": "",
+									"equals": false
+								}
+							]
+						},
+						"description": "#### Example Request (needs update)\n\nAssign the value \"default\" to the key \"permissions\".\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d key=permissions \\\n    -d value=default \\\n    https://my-app.janraincapture.com/settings/set_default_multi\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/settings/set_multi",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/settings/set_multi?for_client_id=&items=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"settings",
+								"set_multi"
+							],
+							"query": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "items",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d for_client_id=fghi7890fghi7890 \\\n    -d items={\"owner\":\"Jay\",\"public\":true,\"level\":10} \\\n    https://my-app.janraincapture.com/settings/set_multi\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{auth_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{auth_client_id}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e56c893a-bd7d-4a59-9d1a-bbaee1a57769",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6495a4ae-f9d3-4490-a914-083eaaaa8886",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

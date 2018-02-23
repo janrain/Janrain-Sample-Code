@@ -1,0 +1,1544 @@
+{
+	"info": {
+		"name": "Janrain Authentication API",
+		"_postman_id": "3d4fc007-c65b-7233-b1fd-9c16a29c3b80",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "access",
+			"item": [
+				{
+					"name": "/access/getAccessToken",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "for_client_id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "uuid",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/access/getAccessToken?uuid=&type_name={{entity_type_name}}&for_client_id={{client_id}}",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"access",
+								"getAccessToken"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "id",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}",
+									"equals": true
+								},
+								{
+									"key": "for_client_id",
+									"value": "{{client_id}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d uuid=78907890wxyzwxyz \\\n    -d type_name=user \\\n    https://my-app.janraincapture.com/access/getAccessToken\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/access/getAuthorizationCode",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "uuid",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "type_name",
+									"value": "{{type_name}}",
+									"type": "text"
+								},
+								{
+									"key": "transaction_state",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "lifetime",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "for_client_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/access/getAuthorizationCode?uuid=&redirect_uri={{redirect_uri}}&type_name={{entity_type_name}}",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"access",
+								"getAuthorizationCode"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "id",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"equals": true
+								},
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}",
+									"equals": true
+								},
+								{
+									"key": "transaction_state",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "lifetime",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "for_client_id",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d redirect_uri=http://foo.janraincapture.com/oauth/flags=stay_in_window \\\n    -d '{\"password_recover\": true}' \\\n    -d id=4 \\\n    https://my-app.janraincapture.com/access/getAuthorizationCode\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/access/getCreationToken",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type_name",
+									"value": "{{type_name}}",
+									"type": "text"
+								},
+								{
+									"key": "lifetime",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "for_client_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/access/getCreationToken?type_name={{entity_type_name}}&for_client_id={{client_id}}&lifetime=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"access",
+								"getCreationToken"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}",
+									"equals": true
+								},
+								{
+									"key": "for_client_id",
+									"value": "{{client_id}}",
+									"equals": true
+								},
+								{
+									"key": "lifetime",
+									"value": "",
+									"equals": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d lifetime=3600 \\\n    -d for_client_id=fghi7890fghi7890 \\\n    https://my-app.janraincapture.com/access/getCreationToken\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/access/getVerificationCode",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "uuid",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "type_name",
+									"value": "{{type_name}}",
+									"type": "text"
+								},
+								{
+									"key": "attribute_name",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "lifetime",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/access/getVerificationCode?uuid=&type_name={{entity_type_name}}&attribute_name=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"access",
+								"getVerificationCode"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "id",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								},
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}",
+									"equals": true
+								},
+								{
+									"key": "attribute_name",
+									"value": "",
+									"equals": true
+								},
+								{
+									"key": "lifetime",
+									"value": "",
+									"equals": false,
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nThe example shows a request that gets a verification code for setting an\nattribute named \"emailVerified\" in the Person entity with an id of 1.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d id=1 \\\n    -d type_name=Person \\\n    -d attribute_name=emailVerified \\\n    https://my-app.janraincapture.com/access/getVerificationCode\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/access/useVerificationCode",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "verification_code",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/access/useVerificationCode?verification_code=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"access",
+								"useVerificationCode"
+							],
+							"query": [
+								{
+									"key": "verification_code",
+									"value": "",
+									"equals": false
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d verification_code=12345678912345678912345678912345 \\\n    https://my-app.janraincapture.com/access/useVerificationCode\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "oauth",
+			"item": [
+				{
+					"name": "/oauth/auth_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "registration_form",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "merge_token",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "response_type",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "thin_registration",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/auth_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"auth_native"
+							]
+						},
+						"description": "\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/auth_native_traditional",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "form",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "merge_token",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "response_type",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/auth_native_traditional",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"auth_native_traditional"
+							]
+						},
+						"description": "#### Example Request\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/forgot_password_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "form",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/forgot_password_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"forgot_password_native"
+							]
+						},
+						"description": "\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/link_account_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "access_token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/link_account_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"link_account_native"
+							]
+						},
+						"description": "#### Example\n\nThis example links a new social provider identity to an existing user\naccount so that the new identity can be used to sign into the user\naccount.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d locale=en-US\\\n    -d redirect_uri=http://localhost\\\n    -d token=c218fae033c5faa70d2403a2c549e24c30b98e8f\\\n    -d access_token=123456789123456789 \\\n    -d flow=standard\\\n    -d flow_version=66d55f6d-76a4-428f-a659-fc765dfb926f \\\n    https://my-app.janraincapture.com/oauth/link_account_native\n```\n\n\nParameters:"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/register_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "form",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "response_type",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/register_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"register_native"
+							]
+						},
+						"description": "#### Example\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/register_native_traditional",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "form",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "response_type",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/register_native_traditional",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"register_native_traditional"
+							]
+						},
+						"description": "\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/token?grant_type=&code=&redirect_uri={{redirect_uri}}&referesh_token=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "",
+									"equals": false
+								},
+								{
+									"key": "code",
+									"value": "",
+									"equals": false
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"equals": true
+								},
+								{
+									"key": "referesh_token",
+									"value": "",
+									"equals": false
+								}
+							]
+						},
+						"description": "#### Example\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d code=asdf1234 \\\n    -d redirect_uri=https://www.example.com/oauth_redirect \\\n    -d grant_type=authorization \\\n    https://my-app.janraincapture.com/oauth/token\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/unlink_account_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "access_token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "identifier_to_remove",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/unlink_account_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"unlink_account_native"
+							]
+						},
+						"description": "#### Example\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d access_token=123456789123456789 \\\n    -d local=example_locale \\\n    -d identifier_to_remove=https://www.google.com/profiles/123456789123456789123 \\\n    https://my-app.janraincapture.com/oauth/unlink_account_native\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/update_profile_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "access_token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "form",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/update_profile_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"update_profile_native"
+							]
+						},
+						"description": "#### Example\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d access_token=123456789123456789 \\\n    -d local=example_locale \\\n    -d form=example_form \\\n    https://my-app.janraincapture.com/oauth/update_profile_native\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/oauth/verify_email_native",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "post",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "flow",
+									"value": "{{flow_name}}",
+									"type": "text"
+								},
+								{
+									"key": "flow_version",
+									"value": "{{flow_version}}",
+									"type": "text"
+								},
+								{
+									"key": "form",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "locale",
+									"value": "{{locale}}",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{redirect_uri}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/oauth/verify_email_native",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"verify_email_native"
+							]
+						},
+						"description": "\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "signin",
+			"item": [
+				{
+					"name": "/signin/oauth_token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "provider",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{rpx_realm}}.rpxnow.com/signin/oauth_token",
+							"protocol": "https",
+							"host": [
+								"{{rpx_realm}}",
+								"rpxnow",
+								"com"
+							],
+							"path": [
+								"signin",
+								"oauth_token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{auth_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{auth_client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "saveHelperData",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"key": "showPassword",
+				"value": false,
+				"type": "boolean"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f34ed8d5-587f-4061-a16c-ddcb0eb2b491",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a8a072b0-4e3a-4c30-9ce5-5795efe66bfe",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

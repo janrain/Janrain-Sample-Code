@@ -1,0 +1,1524 @@
+{
+	"info": {
+		"name": "Janrain Data Storage API",
+		"_postman_id": "77807c00-0a4e-0564-bed9-568a9fa914a3",
+		"description": "For use when working with the Data Storage component of Registration which includes entityTypes (schemas) and entities (user records).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "entityType",
+			"item": [
+				{
+					"name": "/entityType",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType?type_name={{entity_type_name}}",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								}
+							]
+						},
+						"description": "#### Example Request\nReturn the a JSON representation of the schema definition for the entityType \"user\".\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    https://my-app.janraincapture.com/entityType\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.addAttribute",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.addAttribute?type_name={{entity_type_name}}&attr_def=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.addAttribute"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attr_def",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nAdd a 50 character key named \"fullName\" to an existing entityType \"user\".\nIn this case, the attribute is added to a simple custom\nschema built with the \"name\", \"type\", and \"length\" attributes.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d attr_def='{\"name\":\"fullName\",\"type\":\"string\",\"length\":50}' \\\n    https://my-app.janraincapture.com/entityType.addAttribute\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.addRule",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.addRule?type_name={{entity_type_name}}&attributes=&description=&definition=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.addRule"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attributes",
+									"value": ""
+								},
+								{
+									"key": "description",
+									"value": ""
+								},
+								{
+									"key": "definition",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d attributes=[\"givenName\"] \\\n    -d description=\"This is a rule to accept only English letters and have a maximum Length of 25\" \\\n    -d definition='{\"and\": [{\"match-all\":\"[a-zA-Z]*\"}, {\"max-length\":25}]}' \\\n    https://my-app.janraincapture.com/entityType.addRule\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.create",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.create?type_name={{entity_type_name}}&attr_defs=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.create"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attr_defs",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### EntityType JSON Structure for attr_defs\n\nHere is a basic example of a small, JSON formatted schema:\n\n```\nattr_defs = [\n  {\n    \"name\": \"Name\",\n    \"type\": \"string\",\n    \"case-sensitive\": false\n  },\n  {\n    \"name\": \"Description\",\n    \"type\": \"string\",\n    \"length\": 1000,\n    \"case-sensitive\": false\n  }\n]\n```\n\nThis creates a new schema with the required default attributes such as id, uuid, as well as the two new ones defined in the JSON above: name and description.\n\n#### Example Request\n\nCreate an \"entityType\" called \"user_test\" with attributes \"Name\" and \"Description\"\nThe \"Name\" attribute is a non-case-sensitive string\nThe \"Description\" attributes is a non-case-sensitive string of max length 1000.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d attr_defs='[{\"name\":\"Name\",\"type\":\"string\",\"case-sensitive\":false},\n                   {\"name\":\"Description\",\"type\":\"string\",\"length\":1000,\"case-sensitive\":false}]' \\\n    https://my-app.janraincapture.com/entityType.create\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.getAccessSchema",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.getAccessSchema?type_name={{entity_type_name}}&for_client_id=&access_type=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.getAccessSchema"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "for_client_id",
+									"value": ""
+								},
+								{
+									"key": "access_type",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nGet the current write access schema for a client.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d for_client_id=0987fghi0987fghi \\\n    -d access_type=write \\\n    https://my-app.janraincapture.com/entityType.setAccessSchema\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.list",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.list",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.list"
+							]
+						},
+						"description": "#### Example Request\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    https://my-app.janraincapture.com/entityType.list\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.removeAttribute",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.removeAttribute?type_name={{entity_type_name}}&attribute_name=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.removeAttribute"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attribute_name",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nRemove an attribute called \"fullName\" from the \"user\" entity.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d attribute_name=fullName \\\n    https://my-app.janraincapture.com/entityType.removeAttribute\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.removeRule",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.removeRule?type_name={{entity_type_name}}&uuid=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.removeRule"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "uuid",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST\n    -d client_id=12345abcde12345abcde\n    -d client_secret=edcba54321edcba54321\n    -d type_name=user\n    -d uuid=0987-fghi-0987-fghi\n    https://my-app.janraincapture.com/entityType.addRule\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.rules",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.rules?type_name={{entity_type_name}}",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.rules"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								}
+							]
+						},
+						"description": "```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    https://my-app.janraincapture.com/entityType.rules\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.setAccessSchema",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.setAccessSchema?type_name={{entity_type_name}}&for_client_id=&access_type=&attributes=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.setAccessSchema"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "for_client_id",
+									"value": ""
+								},
+								{
+									"key": "access_type",
+									"value": ""
+								},
+								{
+									"key": "attributes",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nGive a client read-only access, by setting the write access schema\nto an empty array of attributes.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d for_client_id=7890fghi7890fghi \\\n    -d access_type=write \\\n    -d attributes='[]' \\\n    https://my-app.janraincapture.com/entityType.setAccessSchema\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entityType.setAttributeConstraints",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entityType.setAttributeConstraints?type_name={{entity_type_name}}&attribute_name=&constraints=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entityType.setAttributeConstraints"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attribute_name",
+									"value": ""
+								},
+								{
+									"key": "constraints",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\nSet a \"required\" constraint on an attribute called \"Name\" on the\n'user' entity.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d attribute_name=givenName \\\n    -d constraints=[\"required\"] \\\n    https://my-app.janraincapture.com/entityType.setAttributeConstraints\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "entity",
+			"item": [
+				{
+					"name": "/entity",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity?type_name={{entity_type_name}}&uuid=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "uuid",
+									"value": ""
+								},
+								{
+									"key": "id",
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"disabled": true
+								},
+								{
+									"key": "attribute_name",
+									"disabled": true
+								},
+								{
+									"key": "attributes",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"disabled": true
+								},
+								{
+									"key": "last_updated",
+									"disabled": true
+								},
+								{
+									"key": "password_attribute",
+									"disabled": true
+								},
+								{
+									"key": "password_value",
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Validating User Passwords\n\nThe entity call may also use two optional parameters to validate a\npassword. See the Validate User Passwords topic for more\ninformation.\n\n#### Example request\n\nGet the user data for a user with the ID of 999 created on January\n1, 2013 at noon.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d id=999 \\\n    -d created='2013-01-01 12:00pm' \\\n    https://my-app.janraincapture.com/entity\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.bulkCreate",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.bulkCreate?type_name={{entity_type_name}}&all_attributes=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.bulkCreate"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "all_attributes",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example request\n\nCreate two new users with the names Linus Torvalds and Ada Lovelace.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d all_attributes='[{\"givenName\":\"Linus\",\"familyName\":\"Torvalds\"},{\"givenName\":\"Ada\",\"familyName\":\"Lovelace\"}]' \\\n    https://my-app.janraincapture.com/entity.bulkCreate\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.count",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.count?type_name={{entity_type_name}}",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.count"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "filter",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example request\n\nThis counts the number of records in the entity that contain a value\nin the \"description\" attribute.  For more information on the filter\nattribute, please refer to the entity.find API page.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d filter='description is not null' \\\n    https://my-app.janraincapture.com/entity.count\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.create",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.create?type_name={{entity_type_name}}&attributes=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.create"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attributes",
+									"value": ""
+								},
+								{
+									"key": "include_record",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Formatting the Attributes parameter\n\nThe following is an example of a valid attributes value:\n\n```\n{\n  \"name\": \"Fred\",\n  \"Description\": \"Test User\"\n}\n```\n\n#### Example request\n\nCreate a new instance of entityType 'user,' with attributes id,\ncreated, lastUpdated, firstName, and lastName.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d attributes='{\"firstName\":\"Bob\",\"lastName\":\"Smith\"}' \\\n    https://my-app.janraincapture.com/entity.create\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.delete",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.delete?type_name={{entity_type_name}}&uuid=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.delete"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "uuid",
+									"value": ""
+								},
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "attribute_name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "lastUpdated",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Note: This must be a POST request, and due to validation, cannot\nbe passed as URL parameters. The POST needs to be formatted using\nbody parameters instead.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.deleteAccess",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.deleteAccess?type_name={{entity_type_name}}&uuid=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.deleteAccess"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "uuid",
+									"value": ""
+								},
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Note: This must be a POST request, and due to validation, cannot\nbe passed as URL parameters. The POST needs to be formatted using\nbody parameters instead.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.find",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.find?type_name={{entity_type_name}}",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.find"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "attributes",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "filter",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "max_results",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "first_result",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "show_total_count",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "sort_on",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "### Get all data\n\nThe `entity.find` call takes a `max_results` parameter. You can set that\nto a high value, or it’s also possible to step through sets of values\nwith the `first_results` and `max_results` parameters, for example, in\nbatches of 1000:\n\n-   `first_result=0&max_results=1000`\n-   `first_result=1000&max_results=1000`\n-   `first_result=2000&max_results=1000`\n\n### Get only the most recently updated data\n\nThere is a `lastUpdated` attribute added automatically to schemas. Sort\non this by using the `sort_on` parameter. This takes a JSON list of\nparameters. A minus (`-`) in front of the attribute sorts it by\ndescending order, so in this case sorting by the most recently updated\nwould be:\n\n```\nsort_on=[\"-lastUpdated\"]\n```\n\n### Find users with a birthday\n\n```\nfilter='birthday is not null'\n```\n\n### Find female users only\n\n```\nfilter='gender != \"male\"'\n```\n\n### Adding more than one condition to a filter:\n\n```\nfilter='gender=\"male\" and birthday > \"2012-06-13 18:02:56.012122 +0000\"'\n```\n\n### More Comprehensive Examples List\n\nIf you’d like to see a broader set of examples of API calls to the\n`entity.find` endpoint, please see the [Example /entity.find\nCalls](http://developers.janrain.com/reference/examples/registration-entity-find-call-examples/)\npage in the Reference section.\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.purge",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.purge?type_name={{entity_type_name}}&commit=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.purge"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "commit",
+									"value": ""
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d commit=true \\\n    https://my-app.janraincapture.com/entity.purge\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.replace",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.replace?type_name={{entity_type_name}}&uuid=&attributes=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.replace"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "uuid",
+									"value": ""
+								},
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "attributes",
+									"value": ""
+								},
+								{
+									"key": "attribute_name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "lastUpdated",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "include_record",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\nThis example shows how to request the replacement of an instance of\ntype 'user' by UUID with a new set of attributes.\n\n```\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba5432 \\\n    -d type_name=user \\\n    -d uuid=0987098709870987 \\\n    -d attributes='{\"firstName\":\"Bob\",\"lastName\":\"Smith\"}' \\\n    https://my-app.janraincapture.com/entity.replace\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "/entity.update",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "{{auth_client_id}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{auth_client_secret}}",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{registration_realm}}.janraincapture.com/entity.update?type_name={{entity_type_name}}&uuid=&attributes=",
+							"protocol": "https",
+							"host": [
+								"{{registration_realm}}",
+								"janraincapture",
+								"com"
+							],
+							"path": [
+								"entity.update"
+							],
+							"query": [
+								{
+									"key": "type_name",
+									"value": "{{entity_type_name}}"
+								},
+								{
+									"key": "uuid",
+									"value": ""
+								},
+								{
+									"key": "id",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_attribute",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "key_value",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "attributes",
+									"value": ""
+								},
+								{
+									"key": "attribute_name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "created",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "lastUpdated",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "include_record",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### Example Request\n\n```\n# This example shows how to update an instance of entityType \"user\" by id,\n# with new attributes for \"firstName\" and \"lastName\"\n\ncurl -X POST \\\n    -d client_id=12345abcde12345abcde \\\n    -d client_secret=edcba54321edcba54321 \\\n    -d type_name=user \\\n    -d uuid=0987098709870987 \\\n    -d attributes='{\"firstName\":\"Bob\",\"lastName\":\"Smith\"}' \\\n    https://my-app.janraincapture.com/entity.update\n```\n\n\nParameters:\n\n"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{auth_client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{auth_client_id}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "ff4152cd-cfba-41a3-8937-ded7ffc16bed",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "690d0013-506a-41a8-9419-deb83b4b4dd4",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
