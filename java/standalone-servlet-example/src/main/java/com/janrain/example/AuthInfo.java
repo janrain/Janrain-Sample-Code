@@ -41,7 +41,7 @@ public class AuthInfo extends HttpServlet {
         writer.close();
         // Here, we're just copying the response returned by the API to the page served to the browser.
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/javascript");
+        response.setContentType("application/json");
         IOUtils.copy(connection.getInputStream(), response.getOutputStream());
     }
 

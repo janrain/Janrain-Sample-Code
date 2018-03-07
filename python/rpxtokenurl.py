@@ -1,10 +1,6 @@
 # This code sample shows how to make the auth_info API call using Python.
 
-import urllib
-import urllib2
-
-# json is native in python 2.6, but must be installed for previous versions
-import json
+import requests
 
 # Step 1) Extract the token from your environment.  If you are using app engine,
 # you'd do something like:
@@ -24,23 +20,25 @@ import json
 
 # Step 2) Now that we have the token, we need to make the api call to auth_info.
 # auth_info expects an HTTP Post with the following paramters:
-api_params = {
+
+engage_api_params = {
     'token': token,
     'apiKey': 'REPLACE_WITH_YOUR_RPX_API_KEY',
-    'format': 'json',
+    'format': 'json'
 }
 
-# make the api call
-http_response = urllib2.urlopen('https://rpxnow.com/api/v2/auth_info',
-                                urllib.urlencode(api_params))
+engage_api_url = 'https://rpxnow.com/api/v2/auth_info'
 
-# read the json response
-auth_info_json = http_response.read()
+# make the api call
+
+api_response = requests.get(engage_api_url, params=engage_api_params)
 
 # Step 3) process the json response
-auth_info = json.loads(auth_info_json)
+
+auth_info = api_response.json()
 
 # Step 4) use the response to sign the user in
+
 if auth_info['stat'] == 'ok':
     profile = auth_info['profile']
    
@@ -61,6 +59,3 @@ if auth_info['stat'] == 'ok':
    
 else:
     print 'An error occured: ' + auth_info['err']['msg']
-
-
- 
